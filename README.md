@@ -11,12 +11,14 @@
 <br/>
 <br/> 
 
----
-<!-- 
+
+<!--   
+
+ ---
 1. 이미지 (캐리커쳐)
 2. 이름 , 이메일, 깃허브주소, 포트폴리오  4*2의 테이블형식으로 -->
 ## 📌Contact  & Links 
-<img src="./track001_github/me2.png"      
+<img src="/track001_github/me2.png"      
      alt="프로필"  width="50" />
 
 | | |
@@ -63,7 +65,75 @@
 -->
 ---
 <!--  정리해놓은 day1, day2,  -->
-## 📌 트러블슈팅 (github에서 발생)
+## 📌 트러블슈팅
+
+### 🐞 트러블슈팅 (1)
+
+```bash
+$ git commit -m "git 수정 후 다시올리기"
+...
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+- **문제점**  
+  수정한 파일이 있지만 `git add`를 하지 않아 커밋 대상에 포함되지 않음.
+  
+- **해결방안**  
+  ```bash
+  git add day001.md
+  git commit -m "day001.md 수정사항 반영"
+  ```
+
+- **느낌점**  
+  커밋은 했는데 아무것도 반영되지 않았을 때 당황스러웠다. 정말 황당하게도 **저장을 하지 않아서 발생한문제** 기본적인 Git 흐름을 다시 점검하는 계기가 되었고, 커밋 전 `git status` 확인 습관을 들여야겠다고 꼭 저장하는 습관 다시한번 확인하기를 느꼈다.  
+
+---
+
+### 🔀 트러블슈팅 (2)
+
+```bash
+$ git pull origin master
+...
+CONFLICT (content): Merge conflict in day002.md
+```
+
+- **문제점**  
+  원격 저장소와 로컬 파일 간 충돌 발생. 자동 병합 실패.
+
+- **해결방안**  
+  1. 충돌 파일(`day002.md`)을 열어 충돌 부분 수정  
+  2. 수정 후 커밋  
+     ```bash
+     git add day002.md
+     git commit -m "충돌 해결: day002.md"
+     ```
+
+- **느낌점**  
+  충돌 메시지를 처음 봤을 땐 막막했지만, 직접 해결해보니 Git의 병합 원리를 이해하게 되었다. 협업 시 충돌을 줄이기 위해 커밋 주기와 Pull 타이밍을 조율하는 것이 중요하다는 걸 체감했다.
+
+---
+
+### ⛔ 트러블슈팅 (3)
+
+```bash
+$ git pull origin master
+error: You have not concluded your merge (MERGE_HEAD exists).
+```
+
+- **문제점**  
+  이전 병합이 완료되지 않은 상태에서 다시 Pull을 시도함. Git이 병합 중이라는 상태를 유지하고 있음.
+
+- **해결방안**  
+  병합을 먼저 마무리해야 함.  
+  ```bash
+  git status  # 병합 중인 파일 확인
+  git add .
+  git commit -m "병합 완료"
+  ```
+
+- **느낌점**  
+  Git은 상태 기반으로 동작한다는 걸 실감했다. 병합 중이라는 상태를 명확히 인식하고, 단계별로 처리해야 오류를 피할 수 있다. Git의 내부 동작을 더 깊이 이해하게 된 계기였다.
+ 
 
 
 <br/>
