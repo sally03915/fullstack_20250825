@@ -74,26 +74,44 @@ public class A000_ex {// 아무데서나 접근가능 , 부품객체
 ```
 
 
-#### 7. 출력
-System.out.print("Hello");   // 줄바꿈안됨.
-System.out.println("Hello");   // 줄바꿈 됨.
-System.out.println("Hello\nSally");   // 줄바꿈.
-// 포맷형식  %s , %d
-System.out.printf("이름 : %s  나이: %d " , "길동"  , 12 );
+ 
 
-```bash
-package com.company.java001;
+#### ■7. 출력 (1)   println, print, printf
+ 1)  System.out.println("문자열-하고싶은말");  // \n줄바꿈
+ 2)  System.out.print("문자열-하고싶은말");   //줄바꿈처리안됨
+ 3)  System.out.printf("내나이%d ,  내이름%s , 좋아하는 숫자  파이 %f" , 10 , "ab" , 1.23 );
+     %d 숫자정수 : 10,20,30  ( 소수점 안붙음)
+     %s  문자열   :  "abc"
+     %f 숫자실수 :  1.23 , 1.5, 3.14
+     
+   System.out.println("A");   
+   System.out.println("AB");   
+   System.out.println("ABC");   
 
-public class A002 {
-	public static void main(String[] args) {
-		System.out.println("A");
-		System.out.println("AB");
-		System.out.println("ABC"); // 여러줄사용
-		
-		// 한줄로만드는 방법은?
-		System.out.println("A\nAB\nABC");  // 줄바꿈  \n
-		
-		// 포맷형식  %s , %d
-		System.out.printf("이름 : %s  나이: %d " , "길동"  , 12 );
-	}
-}
+   System.out.println("A\nAB\nABC");   
+
+#### ■7. 출력 (2)   + 의미 , ()
+System.out.println( 1+ 2 );    //3
+System.out.println( 1+ 2 + "+" + 3 +4);  // 3 + 34    ?
+System.out.println( "" + 1+ 2);  // 12
+
+1)            +    연산(더하기)
+2)     숫자 +   숫자        - 더하기연산
+3)     숫자 +   문자열 ,   문자열 + 숫자   - 출력
+ 
+
+연습문제1)  
+패키지명 : com.company.java002_ex
+클래스명 : PrintEx001
+출력내용 : 
+   %s를 이용해서  다음과 같이 출력
+   
+    좋아하는 색상은 RED입니다.
+
+
+연습문제2)  
+패키지명 : com.company.java002_ex
+클래스명 : PrintEx002
+출력내용 : 
+   다음의 코드를 10+3=13  나오게 도전!
+   System.out.println(  10+3=10+3  );   
