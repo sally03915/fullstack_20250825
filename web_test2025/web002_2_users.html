@@ -12,12 +12,16 @@
 
         h1{text-align:center; color:#e1306c; padding-bottom:20px;}
        
-        #d1, #d2, #d3{background-color:#fff; width:300px; margin:50px auto 20px; 
+        .divWrap{background-color:#fff; width:300px; margin:50px auto 20px; 
         padding:60px 20px 20px; border-radius:30px; box-shadow:0 4px 12px rgba(0,0,0,0.1); 
-        text-align:center; background:linear-gradient(135deg, #ffffff, #ffd6e0);}
+        text-align:center; background:linear-gradient(135deg, #ffffff, #ffd6e0);
+        transform:translateY(0); transition:all .3s ease .2s;}
 
         #d2{background:linear-gradient(135deg, #ffffff, #feffd6);}
         #d3{background:linear-gradient(135deg, #ffffff, #d6fff5);}
+        
+        .divWrap:hover{transform:translateY(20px); box-shadow:0 10px 100px rgba(0,0,0,0.3); }
+        
 
         .pImg, .pImg1{margin:0 auto; width:180px; height:180px; 
             border-radius:50%; border:3px solid #e1306c;}
@@ -38,7 +42,7 @@
 </head>
 <body>
     <h1>프로필 만들기</h1>
-    <div id="d1">
+    <div id="d1" class="divWrap">
         <div>
             <div>
                 <p class="pImg">
@@ -64,7 +68,7 @@
             </div>
         </div>
     </div>
-   <div id="d2">
+   <div id="d2" class="divWrap">
         <div>
             <div>
                 <p class="pImg1">
@@ -90,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div id="d3">
+    <div id="d3" class="divWrap">
         <div>
              <div>
                 <p class="pImg1">
