@@ -22,6 +22,8 @@ public class InputEx2002 {
 		System.out.println("총점 : " + total);
 		System.out.println("평균 : " + avg); 
 	}
+	
+	//public static void  nextInt() { 1.2.3.4.5.6.7.8.  }
 }
 
 /*
