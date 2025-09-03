@@ -45,7 +45,7 @@ public class CastingEx002_1 {
 	 * */
 		
 		//변수
-		int walk, minit, sleeps, total, level;
+		int walk, walkj, minit, minitj, sleeps, sleepj, total, level;
 		double avg;
 		
 		//입력
@@ -62,16 +62,16 @@ public class CastingEx002_1 {
 		//처리
 
 		// 1000걸음 당 1점
-		walk = walk/1000;
+		walkj = walk/1000;
 		
 		// 10분단 1점
-		minit = minit/10;
+		minitj = minit/10;
 		
 		// 1시간당 2점
-		sleeps = sleeps*2;
+		sleepj = sleeps*2;
 		
 		// 총점
-		total = walk + minit + sleeps;
+		total = walkj + minitj + sleepj;
 		
 		// 평균
 		avg = (double)total/3;
