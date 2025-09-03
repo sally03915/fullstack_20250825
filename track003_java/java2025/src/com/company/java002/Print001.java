@@ -10,11 +10,8 @@ public class Print001 {// 어디서든지  부품객체 Print001
 	   System.out.print("줄바꿈 특수 \\n이용");
 	   
 	   //3. System.out.printf() %s "abc"  %d 1  %f 1.23
-<<<<<<< HEAD
-	   System.out.printf("\n3. 정수 %d, 실수 %f, 문자열 %s\n" ,1, 1.2 , "abc");
-=======
 	   System.out.printf("\n3. 정수 %d, 실수 %.2f, 문자열 %s\n" ,1, 1.234567 , "abc");
->>>>>>> dev-hyojung
+ 
    
 	   //4. +의 의미
 	   System.out.println(10+3); //13  
