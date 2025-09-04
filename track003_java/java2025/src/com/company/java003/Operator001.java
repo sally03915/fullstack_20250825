@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Operator001 {
 	public static void main(String[] args) {
 		// 먼저() 값(+,-,*,/,%,++,--) 비교(>,<) 조건(&& , || ,?:) 대입(=)
-		
+	 
 		// 1. 값
 		int a = 10, b=3;
 		System.out.println(a+b);
@@ -51,13 +51,51 @@ public class Operator001 {
 		System.out.println( a==10 ? "10이다" : "10이 아니다"    );
 		
 		//Q3.  숫자를 입력받아  0보다크면 양수, 0보다 작으면 음수, 아니라면 0 
+		/*
 		Scanner scanner = new Scanner(System.in);
 		int q3 = scanner.nextInt();
 		//				조건    ?  참    :   거짓
 		String result = q3 > 0 ? "양수" :        q3  < 0 ? "음수" :"0" ;
+		*/
 		
+		//5. 대입연산자
+		a = 10; b=3;
+		System.out.println( "1: " +    ( a+=b ) );   //1) a+b  2) a=13
+		System.out.println( "2: " +    ( a-=b ) );   //1) a-b  2) a=10
+		
+
+		a = 10; b=3;  // a[10]  b[3]
+		a=a+b;        // a[13]     10+3    
+					  // a+=b
+		System.out.println("3: " + a);
+		a=a-b;		 // a[13]  b[3]	  
+					 // a[10]  13-3
+					 // a-=b
+		System.out.println("4: " + a);
+		
+		
+		//6. 단항
+		int a1 = 1, b1=1, c1=1, d1=1;
+		
+		System.out.println(  ++a1  );  //2   증가출력
+		System.out.println(    a1  );  //2
+		
+		System.out.println(  b1++  );  //1   출력증가
+		System.out.println(    b1  );  //2
+		
+		System.out.println(  --c1  );  //0   감소출력
+		System.out.println(    c1  );  //0
+		
+		System.out.println(  d1--  );  //1   출력감소
+		System.out.println(    d1  );  //0
 	}
 }
+
+
+
+
+
+
 
 
 
