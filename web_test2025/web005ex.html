@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*전체 여백빼기*/
+        * {margin:0; padding:0;}
+        body{margin:0; padding:0;  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-image: linear-gradient(135deg, #fff1eb, #ace0f9);}
+
+        h1{text-align:center; color:#34495e; margin-bottom:40px;}
+        .portfolio{width:250px; margin:0 auto 30px; border-radius:20px; 
+            text-align:center; box-shadow:5px 10px 10px rgba(0,0,0,0.2); 
+            padding:20px; transition:all .3s ease .2s;}
+
+        .portfolio:hover{transform:scale(1.2) rotatey(360deg); 
+            box-shadow: 0px 0p 100px rgba(0,0,0,0.5); }
+        
+        .project1{background-image: linear-gradient(135deg, #fceabb, #f8b500);}
+        .project2{background-image: linear-gradient(135deg, #d5fefd, #a1c4fd);}
+        .project3{background-image: linear-gradient(135deg, #fbc2eb, #a6c1ee);}
+
+        .backImg p{width:180px; height:97px;  margin:0 auto; 
+             border-radius:40px; border:3px solid #34495e; background-size:100%;}
+
+        .portfolio .pimg1{ background-image:url("img/portfolio1.jpg");}
+        .portfolio .pimg2{background-image:url("img/portfolio2.jpg");}
+        .portfolio .pimg3{background-image:url("img/portfolio3.jpg");}
+
+        .portfolio h2{padding:20px 0 5px; font-size:18px; color:#2c3e50; }
+        .portfolio p{font-size:14px; color:#555; padding-bottom:10px; }
+        .portfolio a{font-size:13px; color:#34495e; text-decoration:none; }
+        .portfolio h3{padding-top:20px; font-size:16px; color:#2c3e50;}
+        .portfolio ul{text-align:left; padding-left:20px; color:#2c3e50; }
+
+
+    </style>
+</head>
+<body>
+    <h1>📁 프로젝트 설명 카드</h1>
+    <div class="portfolio project1">
+        <div>
+            <div class="backImg">
+                <p class="pimg1">
+                </p>
+            </div>
+            <div>
+                <h2>도전 추천 웹앱</h2>
+                <p>기획자: 사장님</p>
+                <p class="pow">사용자 취향 기반으로 도서를 추천하는 웹 서비스</p>
+                <p class="links">
+                    <a href="https://github.com/remonadd21/imstack_20250825"
+                    target="_blank">깃허브 저장소 보기</a>
+                </p>
+            </div>
+             <div>
+                <h3>핵심기능</h3>
+                <ul>
+                    <li>사용자 입력 기반 추천 알고리즘</li>
+                    <li>카드 UI를 활용한 도서정보 시각화</li>
+                    <li>팀원 역할 분 담 및 협업 관리</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+   <div class="portfolio project2">
+        <div>
+            <div class="backImg">
+                <p class="pImg pimg2">
+                </p>
+            </div>
+            <div>
+                <h2>반응형 포트폴리오 사이트</h2>
+                <p>프론트엔드: June</p>
+                <p class="pow">디자이너와 협업하여 제작한 개인 포트폴리오 웹사이트</p>
+                <p class="links">
+                    <a href="https://github.com/remonadd21/imstack_20250825"
+                    target="_blank">배포된 페이지 보기</a>
+                </p>
+            </div>
+            <div>
+                <h3>주요기술</h3>
+                <ul>
+                    <li>HTML5 / CSS3 / JavaScript</li>
+                    <li>미디어쿼리를 활용한 반응형 디자인</li>
+                    <li>Figma 기반 UI 설계</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio project3">
+        <div>
+             <div class="backImg">
+                <p class="pImg pimg3">
+                </p>
+            </div>
+            <div>
+                <h2>AI 기반 독서 취향 분석기</h2>
+                <p>AI 분석: Mina</p>
+                <p class="pow">독서 이력 데이터를 기반으로 취향을 분석하고 도서를 추천</p>
+                <p class="links">
+                    <a href="https://github.com/remonadd21/imstack_20250825"
+                    target="_blank">프로젝트 상세 보기</a>
+                </p>
+            </div>
+            <div>
+                <h3>기술 스택</h3>
+                <ul>
+                    <li>Python / Pandas / Scikit-learn</li>
+                    <li>자연어 처리 기반 키워드 분석</li>
+                    <li>데이터 시각화 및 사용자 피드백 반영</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
