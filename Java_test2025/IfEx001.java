@@ -16,9 +16,14 @@ public class IfEx001 {
 		
 		System.out.print("평균 점수를 입력하세요: ");
 		double avg =sc.nextDouble();
-		
+		System.out.println(">>>> if문 으로 문제 풀기");
 		if(avg >=60) { System.out.println( avg+"점 으로 합력입니다.");}
 		else { System.out.println(avg+"점 으로 불합격 입니다.");}
+		
+		System.out.println(">>>> 3항 연산자");
+		System.out.println( (avg>=60)?avg+"점으로 합격": (avg<60)? avg+"불합격":"범위 안의 숫자를 입력하세요" );
+		
+		
 		
 	/*
 	연습문제2)

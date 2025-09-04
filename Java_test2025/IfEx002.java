@@ -22,13 +22,13 @@ public class IfEx002 {
 		//처리
 		//출력
 		System.out.println(">>> if문");
-		if(num%2==0) {System.out.println("양수 입니다.");}
-		else if(num%3==0) {System.out.println("음수 입니다.");}
+		if(num > 0) {System.out.println("양수 입니다.");}
+		else if(num < 0) {System.out.println("음수 입니다.");}
 		else {System.out.println("Zero 입니다.");}
 		
 		System.out.println(">>> 삼항식");
 		//:: 삼항식
-		System.out.println( (num%2==0)?"양수":(num%3==0)?"음수":"ZERO");
+		System.out.println( (num > 0)?"양수":(num < 0)?"음수":"ZERO");
 		
 		
 		/*
