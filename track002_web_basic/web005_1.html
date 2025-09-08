@@ -49,6 +49,14 @@
         .p2  .me{  position:fixed;  bottom:100px; right:0; /* 브라우저기준 */
             background-color:red;
         }
+
+        /* Q8.  display */
+        .d1  li { display: inline; }
+        .d2  li { display: inline-block;  
+            width: 100px;    padding: 10px; background-color: gold;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -74,6 +82,21 @@
     <div class="container p2">
         <h3>3. 배치 (2)  position - fixed </h3>
         <p class="me">WHERE I AM?</p>
+    </div>
+
+    <div class="container">
+        <h3>4. display 요소속성변경 </h3>
+        <ul>
+            <li>APPLE</li> <li>BANANA</li> <li>COCONUT</li>
+        </ul>
+        <hr/>
+        <ul class="d1">
+            <li>APPLE</li> <li>BANANA</li> <li>COCONUT</li>
+        </ul> 
+        <hr/>
+        <ul class="d2">
+            <li>APPLE</li> <li>BANANA</li> <li>COCONUT</li>
+        </ul>         
     </div>
 
 </body>
