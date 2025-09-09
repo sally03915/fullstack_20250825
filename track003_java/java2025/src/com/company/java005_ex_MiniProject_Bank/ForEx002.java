@@ -1,4 +1,4 @@
-package com.company.java005_ex;
+package com.company.java005_ex_MiniProject_Bank;
 import java.util.Scanner;
 public class ForEx002 {
 	public static void main(String[] args) {

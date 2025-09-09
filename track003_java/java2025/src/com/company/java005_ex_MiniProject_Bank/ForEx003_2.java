@@ -1,4 +1,4 @@
-package com.company.java005_ex;
+package com.company.java005_ex_MiniProject_Bank;
 
 public class ForEx003_2 {
 	public static void main(String[] args) {

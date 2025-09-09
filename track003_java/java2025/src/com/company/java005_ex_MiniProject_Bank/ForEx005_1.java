@@ -1,6 +1,6 @@
-package com.company.java005_ex;
+package com.company.java005_ex_MiniProject_Bank;
 
-public class ForEx005_2 {
+public class ForEx005_1 {
 	public static void main(String[] args) {
 		//변수
 		int cnt=0;   // 소문자 a~z까지 모음의 갯수를 카운트
@@ -19,9 +19,9 @@ public class ForEx005_2 {
 		//if( 'b' == 'a' || 'b' =='e' || 'b' == 'i' || 'b' == 'o' || 'b' == 'u'){ cnt++; }
 		//if( 'c' == 'a' || 'c' =='e' || 'c' == 'i' || 'c' == 'o' || 'c' == 'u'){ cnt++; }
 		
-		for (char i = 'a'; i <= 'z'; i++) {
-			switch(i) { case 'a' : case 'e' : case 'i' : case 'o' : case 'u' : cnt++; }
-		}
+		for(char i='a'; i<='z'; i++)
+		{  if( i == 'a' || i =='e' ||i == 'i' || i == 'o' || i == 'u'){ cnt++; }  }
+		
 		//출력
 		System.out.println("소문자 a~z까지 모음의 갯수 > " + cnt);
 	}
