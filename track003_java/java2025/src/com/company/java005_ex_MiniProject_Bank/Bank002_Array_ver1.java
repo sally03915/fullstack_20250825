@@ -2,7 +2,7 @@ package com.company.java005_ex_MiniProject_Bank;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Bank002_Array {
+public class Bank002_Array_ver1 {
 	public static void main(String[] args) {
 		//변수								  0   1    2
 		String []id=new String[3];       //  one two three
