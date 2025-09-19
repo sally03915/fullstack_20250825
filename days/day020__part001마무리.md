@@ -15,10 +15,6 @@
 길상현 - 강서현, 유희재 , 김영민 , 김정민 
 
 
-# ■ WebBasic
-https://sally03915.github.io/fullstack_20250825/
-
-
 
 # ■ Java
  
@@ -60,44 +56,54 @@ Test007)
 int add(int x, int y) {return x+y;}
 ---------------------------------------
  
-
+int  add(byte  a , byte  b) {  return a+b; }  //a
+int  add(short a , short b) {  return a+b; }  //b
+long add(int   a , int   b) {  return a+b; }  //c
+long add(long  a , long b) {  return a+b; }   //d
 
 
 
 Test008)
  call by value   vs   call by reference
 
+public class Test008 {
+	
+	public static void print(int[]arr) { for(int i=0; i<arr.length; i++) { arr[i]+=10; } }
+	
+	public static void main(String[] args) {
+		int[] arr = { 1, 2, 3 };
+		// call by value -   파라미터 ( 기본값 ) - 값을 복사해서 사용
+		// public static int   print( int a ) {}
+		System.out.println(print(arr[1]));  //2
+		
+
+		// call by reference -        파라미터 ( 주소값 ) -  주소를 참조해서(따라가서) 원본의 값을 바꿈
+		// public static void   print(     int[] arr ) {}
+		print(arr);
+		System.out.println(Arrays.toString(arr)); 
+	}
+	
+	public static int print(int i) { return i; }  //###
+}
+
+
 
 # ■ WebBasic
-## 7. JavaScript
 
-1. 출력
-	document.write("문자열")
-	console.log("문자열")
-
-2. 변수
-	var 전역변수
-	let 지역변수
-	const 상수
-
-3. 자료형
-	자료형 확인 - typeof()
-
-4. 이벤트 
-	onclick  - 클릭시
-	onmouseenter - 마우스를 위에 올렸을때
-	onmouseleave - 마우스를 뗐을때
-
-    window.addEventListener("load" , function(){   });
-
-5. 선택자
-   document.getElementById("아이디명")
-
- 
 1. 깃허브에 docs 폴더만들기.   /docs/index.html
 2. 레파지토리 Settings 에가서 page 설정
 3. docs 에 index.html 파일올리기
+4. 자기소개페이지 [5분]
+> https://본인아이디.github.io/레파지토리이름/
 
+https://sally03915.github.io/fullstack_20250825/
 
-https://www.emailjs.com/
+5. Contact Me
+> https://www.emailjs.com/
+1) 회원가입
+2) 서비스만들기
+3) 템플릿만들기
+4) 코드 수정
+참고)
+https://www.emailjs.com/docs/sdk/installation/
 
