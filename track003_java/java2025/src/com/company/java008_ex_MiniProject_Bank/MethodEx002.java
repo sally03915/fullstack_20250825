@@ -1,4 +1,4 @@
-package com.company.java008_ex;
+package com.company.java008_ex_MiniProject_Bank;
 
 public class MethodEx002 {
 	public static  void  test1(int a){ System.out.println(a); }

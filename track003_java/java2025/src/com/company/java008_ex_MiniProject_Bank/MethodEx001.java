@@ -1,4 +1,4 @@
-package com.company.java008_ex;
+package com.company.java008_ex_MiniProject_Bank;
 
 public class MethodEx001 {
 	public static void dog()  {  System.out.println("멍멍");      }

@@ -197,21 +197,41 @@
     <div class="container">
         <h3 class="text-center">Contact Me</h3>
         <p class="text-center">  열정적인 개발자 홍길동에 문의 주세요! </p>
-        
-        <form action="/action_page.php">
-            <div class="mb-3 mt-3">
-                <label for="title" class="form-label">제목:</label>
-                <input type="text" class="form-control" id="title" 
-                       placeholder="제목을 적어주세요!" name="title">
-            </div>
-            <div class="mb-3">
-                <label for="comment">Comments:</label>
-                <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>            
-            </div>
-            <div class="mb-3 text-end">
-                <button type="submit" class="btn btn-success">메일보내기</button>
-            </div>
-        </form> 
+                
+        <!-- EmailJS 라이브러리 불러오기 -->
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <script>
+        emailjs.init("sally03915"); // EmailJS 대시보드에서 확인한 사용자 ID
+
+        function sendEmail(e) {
+                e.preventDefault(); // 폼 기본 제출 막기 
+                //emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                emailjs.send("sally03915", "template_jwsr2w9", {
+                title: document.getElementById("title").value,
+                comment: document.getElementById("comment").value
+            }).then(function(response) {
+                alert("✅ 메일이 성공적으로 전송되었습니다!");
+            }, function(error) {
+                alert("❌ 메일 전송에 실패했습니다. 다시 시도해주세요.");
+            });
+        }
+        </script>
+
+        <!-- 수정된 폼 -->
+        <form onsubmit="sendEmail(event)">
+        <div class="mb-3 mt-3">
+            <label for="title" class="form-label">제목:</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 적어주세요!" required>
+        </div>
+        <div class="mb-3">
+            <label for="comment">Comments:</label>
+            <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="메시지를 입력하세요" required></textarea>
+        </div>
+        <div class="mb-3 text-end">
+            <button type="submit" class="btn btn-success">메일보내기</button>
+        </div>
+        </form>
+
     </div><!--end container-->
   </section>
 

@@ -1,4 +1,4 @@
-package com.company.java008_ex;
+package com.company.java008_ex_MiniProject_Bank;
 
 public class MethodEx003 {
 	 public static void printProfile(String name,  int age,  String loc){ 

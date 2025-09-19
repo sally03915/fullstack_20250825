@@ -1,4 +1,4 @@
-package com.company.java007_ex; 
+package com.company.java007_ex_MiniProject_Bank; 
 import java.util.Arrays;
 import java.util.Scanner;
 

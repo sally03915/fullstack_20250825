@@ -1,4 +1,4 @@
-package com.company.java008_ex;
+package com.company.java008_ex_MiniProject_Bank;
 
 public class MethodEx004 { 
 	public static int  return_num() { return 1;     }  

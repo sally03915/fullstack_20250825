@@ -1,4 +1,4 @@
-package com.company.java007_ex;
+package com.company.java007_ex_MiniProject_Bank;
 
 public class Array2Ex007 {
 	public static void main(String[] args) {

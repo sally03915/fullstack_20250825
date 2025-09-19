@@ -1,4 +1,4 @@
-package com.company.java008_ex;
+package com.company.java008_ex_MiniProject_Bank;
 
 public class MethodEx007 {
     public static int  add(int x, int y) {return x+y;} //1
