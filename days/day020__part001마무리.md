@@ -94,10 +94,10 @@ Test008)
    document.getElementById("아이디명")
 
  
-1. 깃허브에 docs 폴더만들기.
+1. 깃허브에 docs 폴더만들기.   /docs/index.html
 2. 레파지토리 Settings 에가서 page 설정
 3. docs 에 index.html 파일올리기
-4.
+
 
 https://www.emailjs.com/
 
