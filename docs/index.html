@@ -198,14 +198,17 @@
         <h3 class="text-center">Contact Me</h3>
         <p class="text-center">  열정적인 개발자 홍길동에 문의 주세요! </p>
                 
-        <!-- EmailJS 라이브러리 불러오기 -->
-        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-        <script>
-        emailjs.init("O33O496l0xG9wIbxL"); // 퍼블릭 키
+        <!-- 최신 EmailJS SDK -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        <script type="text/javascript">
+        (function(){
+            emailjs.init({
+            publicKey: "O33O496l0xG9wIbxL"
+            });
+        })();
 
         function sendEmail(e) {
-            e.preventDefault(); // 폼 기본 제출 막기
-
+            e.preventDefault();
             emailjs.send("sally03915", "template_jwsr2w9", {
             name: document.getElementById("name").value,
             email: "sally03915@gmail.com",
@@ -219,20 +222,21 @@
         }
         </script>
 
-        <!-- 수정된 폼 -->
+        <!-- 폼 -->
         <form onsubmit="sendEmail(event)">
         <div class="mb-3 mt-3">
             <label for="name" class="form-label">이름:</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력하세요" required>
-        </div>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div> 
         <div class="mb-3">
             <label for="message" class="form-label">메시지:</label>
-            <textarea class="form-control" rows="5" id="message" name="message" placeholder="메시지를 입력하세요" required></textarea>
+            <textarea class="form-control" rows="5" id="message" name="message" required></textarea>
         </div>
         <div class="mb-3 text-end">
             <button type="submit" class="btn btn-success">메일 보내기</button>
         </div>
         </form>
+
 
 
     </div><!--end container-->
