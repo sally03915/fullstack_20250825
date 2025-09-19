@@ -22,6 +22,50 @@ https://sally03915.github.io/fullstack_20250825/
 
 # ■ Java
  
+Test001)
+	for/while/dowhile
+		+,-,*,/ 입력받을때까지 무한반복 
+
+Test002)
+	이차원배열
+	for + length
+
+	101	102  103
+	201 202  203
+
+Test003 ~005) 다음에 해당하는 메서드를 작성하시오.
+	public static void main(String[] args) {
+		//3
+		dog();   //멍멍
+		
+		//4
+		disp(7, '*');  // ****
+		
+
+		//5
+		System.out.println("당신의 학번은? " + stdId(1111));   //G1111
+		
+	}
+
+
+Test006)
+	이차원배열
+A  B  C
+a  b  c
+
+
+Test007)
+메서드 오버로딩  틀린것은?
+---------------------------------------
+int add(int x, int y) {return x+y;}
+---------------------------------------
+ 
+
+
+
+
+Test008)
+ call by value   vs   call by reference
 
 
 # ■ WebBasic
@@ -50,4 +94,10 @@ https://sally03915.github.io/fullstack_20250825/
    document.getElementById("아이디명")
 
  
-  
+1. 깃허브에 docs 폴더만들기.
+2. 레파지토리 Settings 에가서 page 설정
+3. docs 에 index.html 파일올리기
+4.
+
+https://www.emailjs.com/
+
