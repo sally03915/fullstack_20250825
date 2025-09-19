@@ -197,48 +197,65 @@
     <div class="container">
         <h3 class="text-center">Contact Me</h3>
         <p class="text-center">  열정적인 개발자 홍길동에 문의 주세요! </p>
-                
-        <!-- 최신 EmailJS SDK -->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        
+        <script type="text/javascript"
+                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+        </script>
         <script type="text/javascript">
         (function(){
             emailjs.init({
-            publicKey: "O33O496l0xG9wIbxL"
+                publicKey: "O33O496l0xG9wIbxL",
             });
         })();
+        ///////////////////////////////////
+        function sendEmail( e ){
+            e.preventDefault();  // 무조건 전송기능 막기
+            var templateParams = {
+                name: document.getElementById("name").value   ,
+                // email:document.getElementById("email").value ,
+                title: document.getElementById("title").value ,
+                message: document.getElementById("message").value ,
+            };
 
-        function sendEmail(e) {
-            e.preventDefault();
-            emailjs.send("sally03915", "template_jwsr2w9", {
-            name: document.getElementById("name").value,
-            email: "sally03915@gmail.com",
-            message: document.getElementById("message").value
-            }).then(function(response) {
-            alert("✅ 메일이 성공적으로 전송되었습니다!");
-            }, function(error) {
-            console.error("EmailJS Error:", error);
-            alert("❌ 메일 전송에 실패했습니다. 콘솔을 확인해주세요.");
-            });
+            emailjs.send('sally03915', 'template_jwsr2w9', templateParams).then(
+            (response) => {
+                alert("✅ 메일이 성공적으로 전송되었습니다.");
+                console.log('SUCCESS!', response.status, response.text);
+            },
+            (error) => {
+                alert("❌ 메일 전송에 실패했습니다.");
+                console.log('FAILED...', error);
+            },
+            );
         }
+        ///////////////////////////////////
+
         </script>
-
-        <!-- 폼 -->
+ 
         <form onsubmit="sendEmail(event)">
-        <div class="mb-3 mt-3">
-            <label for="name" class="form-label">이름:</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-        </div> 
-        <div class="mb-3">
-            <label for="message" class="form-label">메시지:</label>
-            <textarea class="form-control" rows="5" id="message" name="message" required></textarea>
-        </div>
-        <div class="mb-3 text-end">
-            <button type="submit" class="btn btn-success">메일 보내기</button>
-        </div>
-        </form>
-
-
-
+            <div class="mb-3 mt-3">
+                <label for="name" class="form-label">name:</label>
+                <input type="text" class="form-control" id="name" 
+                       placeholder="이름을 적어주세요!" name="name">
+            </div>            
+            <!-- <div class="mb-3 mt-3">
+                <label for="email" class="form-label">Reply To email:</label>
+                <input type="email" class="form-control" id="email" 
+                       placeholder="email을 적어주세요!" name="email">
+            </div> -->
+            <div class="mb-3 mt-3">
+                <label for="title" class="form-label">title:</label>
+                <input type="text" class="form-control" id="title" 
+                       placeholder="제목을 적어주세요!" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="message">Comments:</label>
+                <textarea class="form-control" rows="5" id="message" name="message"></textarea>            
+            </div>
+            <div class="mb-3 text-end">
+                <button type="submit" class="btn btn-success">메일보내기</button>
+            </div>
+        </form> 
     </div><!--end container-->
   </section>
 

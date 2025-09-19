@@ -3,7 +3,7 @@
 .project
 .settings/
 eclipse/
-portfolio1/
+portfolio/
 
 # 빌드 결과물 무시
 /bin/

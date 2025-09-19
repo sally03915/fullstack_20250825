@@ -12,7 +12,21 @@
 ### 12. 깃허브 협업 
 ---
 성태훈 - 박현주 , 최상욱, 신준용, 한승현
+https://github.com/taehun00/thejoeun.git
 길상현 - 강서현, 유희재 , 김영민 , 김정민 
+https://github.com/shgil0618-glitch/Bug-Hunters.git
+
+■1. 팀 - 깃허브 
+■2. 각 팀장포함 팀원들 브랜치만들기  > 초대 : sally03915@gmail.com
+todo1) README.md  꾸미기
+todo2) 팀명 / 팀원규칙
+todo3) 포트폴리오 주제상의
+	 1차 : [개인] - 자바포트폴리오 / 자기소개페이지
+     2차 : [팀]   - 주제에 관련된 - B2C 웹(고객중심) 서비스 구축 프로젝트  (커뮤니티)
+	 3차 : [팀]   - 주제에 관련된 - 수익형 풀 스택 프로젝트   (쇼핑몰)
+	 4차 : [팀]   - 주제에 관련된 - 홍보/마케팅이 가능한 SNS 웹사이트프로젝트 (SNS)
+	 5차 : [팀]   - 주제에 관련된 - FLUTTER 추가 
+
 
 
 
@@ -104,6 +118,6 @@ https://sally03915.github.io/fullstack_20250825/
 2) 서비스만들기
 3) 템플릿만들기
 4) 코드 수정
-참고)
-https://www.emailjs.com/docs/sdk/installation/
+	참고)
+	https://www.emailjs.com/docs/sdk/installation/
 
