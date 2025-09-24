@@ -5,17 +5,11 @@ package com.company.java010_ex;
 //- 문제 3. 오류가 발생하는 이유를 설명하시오.
 //- 문제 4. runtime data area 위치영역 그림그리기
 	
-/*   초기화 :  				기본값    			명시적초기화   					초기화블록   생성자  
-   studentCount 			0         				= 0        					x 0
-   maxScore					0         				= 100      					x 100
-   /////////////////////////////////////////////////////////////////////////////////////////////////
-   s1{name, kor, eng}	{name=null, kor=0, eng=0} {name=홍, kor=90, eng=85}  	X {name=홍, kor=90, eng=85} 
-   s2{name, kor, eng}	{name=null, kor=0, eng=0} {name=홍, kor=90, eng=85}  	X {name=홍, kor=90, eng=85} 
-*/															
 
 
 class Student {
-    String name = "홍길동";        // 인스턴스변수 - heap area - new O - 생성자 O  -  this (각각)
+								  // 생성자는 인스턴스변수를 초기화해 사용할수 있게 해준다.
+    String name = "홍길동";         // 인스턴스변수 - heap area - new O - 생성자 O  -  this (각각)
     int kor = 90;                 // 인스턴스변수 - heap area - new O - 생성자 O  -  this (각각)     
     int eng = 85;                 // 인스턴스변수 - heap area - new O - 생성자 O  -  this (각각)
     static int studentCount = 0;  // 클래스변수  - mehotd area - new X - 생성자 X -  static (now)  

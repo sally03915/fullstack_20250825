@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container card">
-        <h3 class="card-header" id="test">repeat023.html</h3>
+        <h3 class="card-header">repeat023.html</h3>
          <div class="card-body">
             <pre class="alert alert-warning">
                 0. 스크립트는 어디서든 동작 가능
@@ -22,14 +22,6 @@
             </pre>
             <input type="button" value="Change Font Size" 
                     id="fontSizeBtn" class="btn btn-warning" />
-            <script>
-                window.addEventListener("load",function(){
-                    document.getElementById("fontSizeBtn").onclick = function(){
-                        document.getElementById("test").style.fontSize = 
-                        prompt("1~5사이 숫자를 입력하시오") + "em";
-                    };
-                });
-            </script>
         </div>
     </div> 
 
