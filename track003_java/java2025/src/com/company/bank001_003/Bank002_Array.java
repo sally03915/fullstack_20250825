@@ -1,4 +1,4 @@
-package com.company.bank; 
+package com.company.bank001_003; 
 import java.util.Arrays;
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package com.company.bank; 
+package com.company.bank001_003; 
 import java.util.Scanner;
 
 public class Bank001_Control {
