@@ -41,6 +41,8 @@ public class Abstract001 {
 		for(Animal a :  arr) {  a.name = "ani" + ++cnt;  a.eat();  }
 	}
 }
+
+
 /* 		  Object  
  *      	↑
 	     Animal {name / eat(), sleep(), poo() }
