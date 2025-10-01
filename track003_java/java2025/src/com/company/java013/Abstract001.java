@@ -1,5 +1,4 @@
 package com.company.java013;
-
 /*   Abstract  (is A) 일반클래스 + 설계
   	 고양이는 동물이다
   	    개도 동물이다

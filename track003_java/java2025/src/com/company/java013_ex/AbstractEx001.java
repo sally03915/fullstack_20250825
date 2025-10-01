@@ -1,6 +1,5 @@
 package com.company.java013_ex;
 
-
 abstract class Robot{
 	String model;  int batteryLevel;
 	void    myrobot() {System.out.println("로봇입니다.");}

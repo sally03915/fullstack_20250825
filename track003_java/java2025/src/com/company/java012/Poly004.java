@@ -29,7 +29,15 @@ public class Poly004 {
 		tb         = (TestB4) ta;  //4. 자식 = 부모 /  다운캐스팅 / 타입캐스팅 O 
 		//3. tb: {int b , @toString}-{int a , ------} 
 		//							 = 3000번지  {int b , [ @toString}-{int a ], ------}
-		
+		/*-------------------------------------------------------------
+		method[공통: static, final, abstract]     TestA4 , TestB4 , Poly004
+		-------------------------------------------------------------	
+		heap[동적]									 | stack[지역]	
+		3000번지 [{int b , @toString}-{int a ], ------} ←   tb[3000번지]  TestB4{int b , @toString}-TestA4{a=10 , -----}
+		3000번지 {int b , [@toString}-{int a ], ------} ←   ta[3000번지]  TestA4{int a=10 , toString}
+	 	1000번지 {int a , toString}     				   ←   ta[1000번지]  TestA4{int a    , toString}
+										             | main
+		-------------------------------------------------------------*/
 		System.out.println(tb);
 		System.out.println(tb.b);
 		System.out.println(tb.a);
