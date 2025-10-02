@@ -19,6 +19,21 @@ class Car implements Vehicle {
 	@Override public void run() { System.out.println("자동차가 달립니다."); }
 }
 class Driver{   void  drive(Vehicle  v){  v.run();  }  }
+// 2. 사용법
+public class InetrfaceEx002 {
+	public static void main(String[] args) {
+		Driver driver = new Driver();  //1. new 번지 객체생성   2.생성자호출   3. driver 주소
+		Car car = new Car();
+		MotorCycle mo = new MotorCycle();
+		// The method drive(Car) is undefined for the type Driver
+		// 메서드기본구조 : 리턴값 메서드명(){    } 
+		//              void  drive(Vehicle  v){}
+		driver.drive(car);   //  자동차가 달립니다.
+		driver.drive(mo);    // 오토바이가 달립니다.             
+	}
+}
+
+
 /*-------------------------------------------------------------
 method[공통: static, final, abstract]   0번지 Vehicle{abstract void run(); } , 002번지 Car ,  003번지  MotorCycle ,  
 									   Driver , InetrfaceEx002
@@ -35,19 +50,7 @@ heap[동적]						| stack[지역]					부모.메서드호출() - 오버라이드
 1번지 Driver{ drive(Vehicle  v);}  ←  driver[1번지]
 								| main
 -------------------------------------------------------------*/
-// 2. 사용법
-public class InetrfaceEx002 {
-	public static void main(String[] args) {
-		Driver driver = new Driver();  //1. new 번지 객체생성   2.생성자호출   3. driver 주소
-		Car car = new Car();
-		MotorCycle mo = new MotorCycle();
-		// The method drive(Car) is undefined for the type Driver
-		// 메서드기본구조 : 리턴값 메서드명(){    } 
-		//              void  drive(Vehicle  v){}
-		driver.drive(car);   //  자동차가 달립니다.
-		driver.drive(mo);    // 오토바이가 달립니다.             
-	}
-}
+
 
 /*
 

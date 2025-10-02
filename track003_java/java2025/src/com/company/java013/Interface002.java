@@ -52,12 +52,3 @@ public class Interface002 {
 		if(my instanceof Inter20){ System.out.println("4. Inter20"); }
 	}
 }
-
-
-
-
-
-
-
-
-
