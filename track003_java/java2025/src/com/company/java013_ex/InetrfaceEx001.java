@@ -47,7 +47,6 @@ Board 인터페이스는 게시판 기능의 공통 동작을 정의하며,
 BoardInsert, BoardSelect, BoardUpdate, BoardDelete 클래스는 이를 구현하여 각각의 기능을 수행한다.
 
 2. 주어진 조건
-
 interface Board {    void exec();  }
 
 구현 클래스들
