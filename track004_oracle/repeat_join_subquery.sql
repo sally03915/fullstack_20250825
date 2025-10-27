@@ -1,0 +1,83 @@
+-- join
+-- emp( deptno ), dept ( deptno )  한 테이블처럼 사용하는방법
+-- (0)   비표준
+SELECT     EMPNO, ENAME, D.DEPTNO, DNAME
+FROM       EMP E, DEPT D
+WHERE      E.DEPTNO = D.DEPTNO  ; 
+
+-- (1) JOIN ON        sql-99 표준
+SELECT     EMPNO, ENAME, D.DEPTNO, DNAME
+FROM       EMP E  join  DEPT D  on(  E.DEPTNO = D.DEPTNO  ); 
+
+-- (2) JOIN USING     sql-99 표준
+SELECT     EMPNO, ENAME, DEPTNO, DNAME
+FROM       EMP E  join  DEPT D  using(DEPTNO); 
+
+
+-- (3) NATURAL JOIN   sql-99 표준
+SELECT     EMPNO, ENAME, DEPTNO, DNAME
+FROM       EMP E  natural join  DEPT D  ; 
+
+
+-- (4) (+) null 값 붙여줄께 - sql 99 이전
+select * from dept;
+
+SELECT     EMPNO, ENAME, D.DEPTNO, DNAME
+FROM       EMP E, DEPT D
+WHERE      E.DEPTNO(+) = D.DEPTNO  ; 
+
+-- (5) right outer join
+SELECT     EMPNO, ENAME, D.DEPTNO, DNAME
+FROM       EMP E  right outer join  DEPT D  on( E.DEPTNO = D.DEPTNO ) ; 
+
+
+-- (6) left outer join
+SELECT     EMPNO, ENAME, D.DEPTNO, DNAME
+FROM       DEPT D  left outer join    EMP E    on( E.DEPTNO = D.DEPTNO ) ; 
+
+-- (7) full outer join
+SELECT     EMPNO, ENAME, D.DEPTNO, DNAME
+FROM       DEPT D  full outer join    EMP E    on( E.DEPTNO = D.DEPTNO ) ; 
+
+
+
+-- subquery
+--EMP 테이블에서 다음과 같이 출력하시오.
+--전체 사원 중 ALLEN과 같은 직책(JOB)인 사원들의 사원정보, 부서정보를 다음과 같이 출력하시오.
+--힌트)
+--SELECT   JOB, EMPNO, ENAME, SAL, DEPTNO,DNAME
+--FROM     EMP
+--WHERE    JOB =   (ALLEN과 같은 직책(JOB))   
+
+-- 1-1 등가 INNER JOIN
+SELECT  JOB, EMPNO, ENAME, SAL, D.DEPTNO , DNAME
+FROM    EMP E ,  DEPT D
+WHERE   E.DEPTNO = D.DEPTNO 
+AND     JOB =  (SELECT JOB FROM EMP  WHERE ENAME='ALLEN');
+  
+-- 1-2
+SELECT  JOB, EMPNO, ENAME, SAL, D.DEPTNO , DNAME
+FROM    EMP E JOIN  DEPT D  ON( E.DEPTNO = D.DEPTNO )
+WHERE      JOB =  (SELECT JOB FROM EMP  WHERE ENAME='ALLEN');
+  
+-- 1-3
+SELECT  JOB, EMPNO, ENAME, SAL, DEPTNO , DNAME
+FROM    EMP E JOIN  DEPT D  USING(DEPTNO)
+WHERE   JOB =  (SELECT JOB FROM EMP  WHERE ENAME='ALLEN');
+
+-- 1-4.
+SELECT  JOB, EMPNO, ENAME, SAL, DEPTNO , DNAME
+FROM    EMP E JOIN  DEPT D  USING(DEPTNO)
+WHERE   JOB  IN (SELECT JOB FROM EMP  WHERE ENAME='ALLEN');
+
+-- 1-5. ★★★★★
+WITH  ALLEN_JOB  AS  (SELECT JOB FROM EMP  WHERE ENAME='ALLEN')
+SELECT  JOB, EMPNO, ENAME, SAL, DEPTNO , DNAME
+FROM    EMP E JOIN  DEPT D      USING(DEPTNO)  
+              JOIN  ALLEN_JOB   USING(JOB);
+
+-- 1-6. 
+SELECT  JOB, EMPNO, ENAME, SAL, DEPTNO , DNAME
+FROM    EMP E JOIN  DEPT D  USING(DEPTNO)
+WHERE   EXISTS  (SELECT 1 FROM EMP A  WHERE A.ENAME='ALLEN'  AND A.JOB= E.JOB );
+
