@@ -56,7 +56,13 @@ CREATE TABLE AppUser (
 
 ※ `UserRole`, `JwtToken`, `UserLoginLog` 등은 인증 서버 구축 시 필요하므로 JSP 단독 프로젝트에서는 생략 가능합니다.
 
+
+
+
 ---
+
+
+
 
 ## 💡 PROJECT1: MBTI 테스트 + 결과보기
 

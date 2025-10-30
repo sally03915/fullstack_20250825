@@ -26,10 +26,10 @@ flowchart TD
 | 번호 | 기술 스택 | 주요 기능 |
 |------|------------|------------|
 | P1 | JSP + Oracle | MBTI 질문/보기 등록 |
-| P2 | Spring MVC + MyBatis | 콘텐츠/질문/일정 관리 (관리자) |
-| P3 | Spring Boot + Thymeleaf | 사용자 추천, 테스트 결과 기반 콘텐츠 |
-| P4 | Node + React | 커뮤니티, 취향 공유 |
-| P5 | Spring Boot + JWT + Redis | 중앙 인증 서버, 통합 API |
+| P2 | (#) Spring MVC + MyBatis + JSTL | 콘텐츠/질문/일정 관리 (관리자) |
+| P3 |   Spring BOOT + JPA + Thymeleaf |사용자 추천, 테스트 결과 기반 콘텐츠 |
+| P4 |   Node + React  | 커뮤니티, 취향 공유 |
+| P5 | (#) Spring BOOT + JPA + React + JWT + Redis |  중앙 인증 서버, 통합 API  | 
 | P6 | Flutter | 모바일 UX, 앱 인터페이스 |
  
 

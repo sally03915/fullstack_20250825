@@ -18,7 +18,7 @@ CREATE TABLE AppUser (
   created_at DATE,
   FOREIGN KEY (mbti_type_id) REFERENCES MbtiType(mbti_type_id)
 );
-\
+ 
 INSERT INTO MbtiType VALUES (1, 'ISTJ', '신중하고 책임감 있는 현실주의자');
 INSERT INTO MbtiType VALUES (2, 'ISFJ', '헌신적이고 따뜻한 보호자');
 INSERT INTO MbtiType VALUES (3, 'INFJ', '통찰력 있고 조용한 이상주의자');
