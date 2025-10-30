@@ -1,4 +1,4 @@
-package com.thejoa703.dto;
+package com.thejoa703.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import com.thejoa703.dto.PostDto;
 
 public class PostDao {
 /*										*/

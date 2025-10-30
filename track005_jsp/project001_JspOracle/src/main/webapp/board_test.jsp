@@ -20,7 +20,7 @@
 	     insert into post ( id                 , app_user_id ,title , content , pass )  
          values ( post_seq.nextval   ,          ?  , ?    ,      ?  ,    ? ) 
 	  </pre>
-	  <%@page import="com.thejoa703.dto.PostDao"%>
+	  <%@page import="com.thejoa703.dao.PostDao"%>
 	  <%@page import="com.thejoa703.dto.PostDto"%>
 <%-- 	  <%
 	  PostDao dao = new PostDao();
