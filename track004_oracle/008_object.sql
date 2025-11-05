@@ -50,23 +50,8 @@ WHERE constraint_name IN (
   FROM user_constraints
   WHERE constraint_type = 'U'
 );
-
-delete from appuser;
-
-select table_name from user_tables; 
-
-select * from appuser; 
-
-
-/*
-APP_USER_ID  NOT NULL NUMBER(5)     
-EMAIL        NOT NULL VARCHAR2(100) 
-PASSWORD              VARCHAR2(100) 
-MBTI_TYPE_ID          NUMBER(3)     
-CREATED_AT            DATE   
-*/
-
-
+  
+ 
 
 
 

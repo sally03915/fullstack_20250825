@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="../inc/header.jsp"%>
 <!-- 	header		 --> 
+<%@ include file="../inc/header.jsp"%>
+
+
 <div class="container mt-5">
 	<h3>WELCOME! 회원가입</h3>
 	<form action="join_process.jsp"  method="post">
@@ -29,6 +31,8 @@
 	</form>
 </div>
 <!-- ctrl + shift + f -->
+
+
 <!-- 	footer		 --> 
 <%@ include file="../inc/footer.jsp"%>
 

@@ -3,6 +3,7 @@ package com.thejoa703.dto;
 import java.time.LocalDateTime;
 
 public class PostDto {
+	////// ##1. 필드명맞추기
 	private int 	 id;
 	private int 	 appUserId;
 	private String   title;
@@ -10,10 +11,18 @@ public class PostDto {
 	private String   pass;
 	private LocalDateTime   createdAt;
 	private int hit;
-	private String   email;
-
-	// 생성자 / toString / getters+setters
+	private String   email; 
+	// 생성자 / toString 
+	// ##2. getters+setters 
 	public PostDto() { super(); }
+	///////////////////////
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	///////////////////////
 	public PostDto(int id, int appUserId, String title, String content, String pass, LocalDateTime createdAt, int hit) { super(); this.id = id; this.appUserId = appUserId; this.title = title; this.content = content; this.pass = pass; this.createdAt = createdAt; this.hit = hit; }
 	public PostDto(int id, int appUserId, String title, String content, String pass, LocalDateTime createdAt, int hit,
 			String email) {

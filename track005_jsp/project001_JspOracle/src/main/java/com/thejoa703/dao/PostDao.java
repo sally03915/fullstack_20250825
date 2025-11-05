@@ -14,6 +14,7 @@ public class PostDao {
 /*										*/
 /*										*/
 //	1. [글쓰기]글쓰기 sql 
+//	public  int  insert( int app_user_id , String title ,String  content , String pass  ){	
 	public  int  insert( PostDto dto ){
 		int result=-1;  //실패
 		String sql = "insert into post ( id                 , app_user_id ,title , content , pass ) "
@@ -50,10 +51,12 @@ public class PostDao {
 /*										*/
 /*										*/
 //	2. [전체보기]전체글가져오기 , appuser테이블에서  email 도 같이 가져오기  sql :  
+// 최신글이 항상맨위로
    public  ArrayList<PostDto> selectAll(){
       ArrayList<PostDto> result = new ArrayList<>();
       String sql = " SELECT      p.*     ,  u.email  email      "
-      		     + " FROM      post p  join appuser u   on  p.app_user_id= u.app_user_id ";
+      		     + " FROM      post p  join appuser u   on  p.app_user_id= u.app_user_id "
+      		     + " order by  id desc";
       // 드 커 프 리
 		Connection conn = null; PreparedStatement pstmt = null;  ResultSet rset = null;
 		String driver="oracle.jdbc.driver.OracleDriver";
@@ -90,7 +93,8 @@ public class PostDao {
 		   
 /*										*/
 /*										*/	
-//   3. [상세보기]글번호  해당하는 글가져오기 sql :  
+//   3. [상세보기]글번호  해당하는 글가져오기 sql : 
+//   public Object[]  select(int id){ 
    public PostDto  select(int id){
       PostDto result = new PostDto();
       String sql = "select * from post  where id=? ";
@@ -98,23 +102,32 @@ public class PostDao {
 		Connection conn = null; PreparedStatement pstmt = null;  ResultSet rset = null;
 		String driver="oracle.jdbc.driver.OracleDriver";
 		String    url="jdbc:oracle:thin:@localhost:1521:xe";
-		String   user="scott" , pass="tiger";
-		// 드 커 프 리 
+		String   user="scott" , pass="tiger";  
 		try {
 			//1. 드라이버연동 
+			Class.forName(driver);
 			//2. 커넥션 
+			conn = DriverManager.getConnection(url, user, pass);
 			//3. PSTMT
-			//4. RESULT
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			//4. RESULT (  select : executeQuery  / insert,update, delete: executeUpdate)
+			rset = pstmt.executeQuery();  //표
+			while(rset.next()) { //줄
+				result = new PostDto(
+						  rset.getInt("id") , rset.getInt("app_user_id") , rset.getString("title") , rset.getString("content")
+						  , rset.getString("pass") , rset.getTimestamp("created_at").toLocalDateTime()  , rset.getInt("hit")  );
+			} 
 		} catch (Exception e) { e.printStackTrace();
 		} finally {
 			if( rset  != null ) { try { rset.close(); } catch (SQLException e) { e.printStackTrace(); } }
 			if( pstmt != null ) { try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); } }
 			if( conn  != null ) { try { conn.close(); } catch (SQLException e) { e.printStackTrace(); } }
-		} 
-      
+		}  
       return result;
    }
 	
+   
    public  int  update_hit( int id ){
       int result = -1;
       String sql = "update post  set  hit=hit+1  where  id=?";
@@ -126,9 +139,15 @@ public class PostDao {
 		// 드 커 프 리 
 		try {
 			//1. 드라이버연동 
+			Class.forName(driver);
 			//2. 커넥션 
+			conn = DriverManager.getConnection(url, user, pass);
 			//3. PSTMT
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
 			//4. RESULT
+			int presult = pstmt.executeUpdate();
+			if(presult >0 ) { result = 1; }
 		} catch (Exception e) { e.printStackTrace();
 		} finally {
 			if( rset  != null ) { try { rset.close(); } catch (SQLException e) { e.printStackTrace(); } }
@@ -150,20 +169,28 @@ public class PostDao {
 		Connection conn = null; PreparedStatement pstmt = null;  ResultSet rset = null;
 		String driver="oracle.jdbc.driver.OracleDriver";
 		String    url="jdbc:oracle:thin:@localhost:1521:xe";
-		String   user="scott" , pass="tiger";
-		// 드 커 프 리 
+		String   user="scott" , pass="tiger"; 
 		try {
 			//1. 드라이버연동 
+			Class.forName(driver);
 			//2. 커넥션 
+			conn = DriverManager.getConnection(url, user, pass);
 			//3. PSTMT
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setInt(   3, dto.getId());
+			pstmt.setString(4, dto.getPass());
 			//4. RESULT
+			int presult = pstmt.executeUpdate();
+			if(presult >0 ) { result = 1; }
+			
 		} catch (Exception e) { e.printStackTrace();
 		} finally {
 			if( rset  != null ) { try { rset.close(); } catch (SQLException e) { e.printStackTrace(); } }
 			if( pstmt != null ) { try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); } }
 			if( conn  != null ) { try { conn.close(); } catch (SQLException e) { e.printStackTrace(); } }
 		} 
-      
       return result;
    }
 	
@@ -182,16 +209,23 @@ public class PostDao {
 		// 드 커 프 리 
 		try {
 			//1. 드라이버연동 
+			Class.forName(driver);
 			//2. 커넥션 
+			conn = DriverManager.getConnection(url, user, pass);
 			//3. PSTMT
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(   1, dto.getId());
+			pstmt.setString(2, dto.getPass());
 			//4. RESULT
+			int presult = pstmt.executeUpdate();
+			if(presult >0 ) { result = 1; }
+			
 		} catch (Exception e) { e.printStackTrace();
 		} finally {
 			if( rset  != null ) { try { rset.close(); } catch (SQLException e) { e.printStackTrace(); } }
 			if( pstmt != null ) { try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); } }
 			if( conn  != null ) { try { conn.close(); } catch (SQLException e) { e.printStackTrace(); } }
-		} 
-      
+		}  
       return result;
    }	
    
