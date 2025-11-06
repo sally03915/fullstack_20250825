@@ -12,6 +12,8 @@ public class MbtiDto {
 }
 
 
+
+
 /*
 Q4. MODEL
 4-1. table

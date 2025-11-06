@@ -1,0 +1,102 @@
+-----
+Q1. dynamic webpoject 
+    - 만들고   ■ web.xml 
+    - 서버띄워서 고양이 localhost:8181 
+Q2. [WEB-INF] - [lib]   objec6.jar / jstl.jar / standard.jar
+Q3. folder [inc] - header.js / footer.js 
+
+-----
+Q4. MODEL
+4-1. table
+SQL> desc mbtitype
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MBTI_TYPE_ID                              NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+ DESCRIPTION                                        VARCHAR2(100)
+
+4-2. dto  [com.company.dto]
+public class  MbtiTypeDto{
+    private  int MBTI_TYPE_ID; 
+    private String name;
+    private String   description;    //생성자 + toString + getters/setters                                                           
+} 
+
+4-3. dao [com.company.dao]
+create :  insert into mbtitype ( MBTI_TYPE_ID ,name,  description)  values ( mbtitype_seq.nextval , ?,?)
+read   :  select * from mbtitype        
+            select * from mbtitype  where MBTI_TYPE_ID =?
+update : update mbtitype   set name=?,  description=? where MBTI_TYPE_ID =?
+delete  : delete  from  mbtitype   where MBTI_TYPE_ID =? 
+
+> ★ oracle 에서 확인하고 dao 작성할것!
+
+4-4. dao_test.jsp
+
+
+-----
+Q5. VIEW 
+▶view - validator     
+ㄴ index.jsp  ()
+1. 전체보기 : list.jsp
+2. 글쓰기    : write.jsp
+3. 상세보기  : detail.jsp
+4. 수정하기  : edit.jsp
+5. 삭제하기  : delete.jsp   (필요판단)
+	
+
+-----
+Q6. CONTROLLER  
+	6-1. frontcontroller -    .do ,   *.hj,   *.mbti  경로 / view 연결확인      
+	6-2. service 구조
+	6-3. service 각각 안에 코드처리
+	6-4. view 연동	
+	
+ 
+	1. frontcontroller 
+	1-1. @WebServlet   개발용       path경로주의!
+	1-2. web.xml          배포용
+
+	ㄴindex.jsp
+		ㄴ  [등록폼]	/regForm.mbti	   □		/mbtitype/write.jsp	
+		ㄴ  [등록기능]         /reg.mbti		   ■ insert()	/mbtiAll.mbti
+		ㄴ  [전체보기]         /mbtiAll.mbti	   ■ selectAll()       /mbtitype/list.jsp	
+		ㄴ  [상세보기]         /mbti.mbti	   ■ select()          /mbtitype/detail.jsp	
+		ㄴ  [수정폼]            /updateForm.mbti     ■ updateForm()	/mbtitype/edit.jsp	
+		ㄴ  [수정기능]         /update.mbti            ■ update()	 /mbti.mbti  해당번호의 글이 바로 수정
+		ㄴ  [삭제기능]         /delete.mbti             ■ delete()	 /mbtiAll.mbti     
+	
+	1-3.  [com.company.controller]  MbtiController.java     *.mbti    
+		★주소표시창줄에서 확인할것!
+	1-4.  view와 연동   
+		★주소표시창줄에서 확인할것!
+
+--------------
+	6-2. service 구조
+		◆  MbtiTypeService<<interface>>
+			△......... MbtiTypeInsert       등록기능    / insert()
+			△......... MbtiTypeSelectAll   전체보기    / selectAll() 
+			△......... MbtiTypeSelect       상세보기,수정폼    / select()  
+			△......... MbtiTypeUpdate     수정기능              / update() 
+			△......... MbtiTypeDelete       삭제기능            / delete() 
+
+	6-3. service 각각 안에 코드처리
+		dao에서 테스트한거 부품조립시 이용
+	6-4. view 연동	
+      	
+
+
+
+      	
+
+
+
+
+
+
+
+
+
+
+
+

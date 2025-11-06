@@ -36,6 +36,7 @@ public class MbtiTypeController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String path = request.getServletPath();
+		
 		MbtiTypeService service = null; //##
 		    
 		if(path.equals("/regForm.mbti")) {  //처리x
