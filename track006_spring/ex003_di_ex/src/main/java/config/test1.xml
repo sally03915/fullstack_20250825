@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Cat  cat = new Cat() -->
+	<bean id="cat" class="com.company.ioctest1.Cat"/>
+
+<!-- Dog  dog = new Dog() -->
+	<bean id="dog" class="com.company.ioctest1.Dog"/>		
+	
+<!-- AnimalFarm animalFarm = new AnimalFram() 
+			 animalFarm.setName("sally");
+			 animalFarm.setAni(    cat ); -->
+	<bean id="animalFarm"  class="com.company.ioctest1.AnimalFarm">
+		<property name="name"  value="sally"></property>
+		<property name="ani"   ref="dog"></property>
+	</bean>
+</beans> 

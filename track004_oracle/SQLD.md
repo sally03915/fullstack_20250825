@@ -670,4 +670,178 @@ Q30)
 ■TCL(제어어-트랜잭션) -CR
   - C(OMMIT) , R(OLLBAK)
 
-  
+
+
+트랜잭션, SELECT, 집계함수, NULL 처리
+Q31)    3 
+
+001	1000
+002	2000  #
+003	1000
+004	2000  # 
+005 2000  #
+-- INSERT
+DELETE
+UPDATE
+-- ROLLBACK 반영안됨
+
+SELECT COUNT(품목ID) FROM 품목 WHERE 단가=2000
+
+
+Q32)  LCD-TV
+
+001	TV
+
+--SP1
+
+001	 LCD-TV
+--SP2
+
+001	 평면-TV
+ROLLBACK TRANSACTION SP2; ##
+
+
+
+Q33) WHERE
+
+SQL을 사용하여 데이터베이스에서 데이터를 조회할 때 원하는 데이터 만을 검색하기 위해서 SELECT, FROM 절과 함께 ① 을(를) 이용하여 조회되는 데이터의 조건을 설정하여 데이터를 제한할 수 있다. 
+
+
+
+Q34)  2
+
+EMPNO	SAL
+100	1500
+200	3000    #
+300	2000
+
+
+SELECT COUNT(*)
+FROM EMP_TBL
+WHERE EMPNO > 100 AND SAL >= 3000 OR EMPNO = 200;
+
+
+Q35)    4
+NULL 상태값
+
+COL1	COL2	COL3
+30	  NULL	20        50
+NULL	10	  40        NULL
+50	NULL	  NULL      NULL
+
+SELECT COL1 + COL3 FROM TAB_A; 
+
+
+Q36) 1
+COLUMN1의 값이 널(NULL)이 아닌 경우
+IS NOT NULL
+IS NULL  
+
+
+Q37)   4
+
+(가) SELECT * FROM 서비스 WHERE 서비스번호 = 1;
+(나) INSERT INTO 서비스 VALUES ('999', ", '2015-11-11');
+(다) SELECT * FROM 서비스 WHERE 서비스명 = ";
+(라) SELECT * FROM 서비스 WHERE 서비스명 IS NULL;
+
+
+① 서비스번호 컬럼에 모든 레코드 중에서 '001'과 같은 숫자형식으로 하나의 레코드만이라도 입력되어 (가)는 오류 없이 실행된다.
+> x 숫자가 아니라 문자형 ``필요함
+② ORACLE에서 (나)과같이 데이터를 입력하였을 때, 서비스명 컬럼에 공백문자 데이터가 입력된다.
+> NULL
+③ ORACLE에서 (나)과같이 데이터를 입력하고, (다)과 같이 조회하였을 때, 데이터는 조회된다.
+> IS NULL , IS NOT NULL
+④ SQL Server에서 (나)과같이 데이터를 입력하고 (o), (라)과 같이 조회하였을때, 데이터는 조회되지 않는다. (O)
+
+ORACLE - 빈문자열 공백
+SQL SERVER - 빈문자열 NULL로 조회
+
+
+
+
+Q38)  4
+
+
+2014년 11월부터 2015년 03월까지의 매출금액 합계를 출력
+
+1. SUM
+2. 년 2014 11 ,12
+      2015 01,02,03
+
+      
+
+Q39)   4
+20150101 날짜비교가  
+
+TO_DATE('201501', 'YYYYMM') = SVC_END_DATE
+
+
+      
+
+Q40) 
+아래와 같은 내장 함수에 대한 설명 중에서 옳은 것을 모두 묶은 것은?
+
+가) 함수의 입력 행수에 따라 단일행 함수와 다중행 함수로 구분할 수 있다. (o)
+나) 단일행 함수는 SELECT, WHERE, ORDER BY, UPDATE의 SET 절에 사용이 가능하다.   (o)
+다) 1:M 관계의 두 테이블을 조인할 경우 M쪽에 다중행이 출력되므로 단일행 함수는 사용할 수 없다. (X)
+라) 단일행 함수는 다중행 함수와 다르게 여러 개의 인수가 입력 되어도 단일 값만을 반환한다. (O)
+
+단일행 SUM(*) , AVG(SAL)
+다중행 - 여러줄
+
+
+
+ 41~50번: 고급 SQL 함수, 날짜 처리, CASE 문
+
+Q41)   3     5줄
+
+(LENGTH(C1) - 
+ LENGTH(REPLACE(C1, CHR(10),'')) + 1)
+                    줄바꿈   ''
+ (본인갯수 - 본인줄바꿈한갯수 빼기) + 1
+ > 해당줄수 카운트
+
+
+Q42)  3
+TO_DATE('2015.01.10 10', 'YYYY, MM, DD HH24') + 1/24/(60/10)
+
+1. HH24   24시
+2. 1/24/(60/10)
+   1/24   1시간/(6) = 10분
+
+   2015.01.10 10:10:00
+
+
+Q43)
+> CASE  LOC  WHEN  'NEW YORK' THEN 'EAST'
+SELECT LOC,
+    CASE WHEN LOC = 'NEW YORK' THEN 'EAST'
+    ELSE 'ETC'
+    END as AREA
+FROM DEPT;
+
+
+SELECT LOC,
+    CASE  LOC  WHEN  'NEW YORK' THEN 'EAST'
+    ELSE 'ETC'
+    END as AREA
+FROM DEPT;
+
+
+Q44) 4
+ELSE 1
+
+Q45) 2
+COL1	COL2
+a	NULL
+b	''
+c	3
+d	4
+e	3
+
+
+Q46)  NULIF(MGR,7698) 
+
+NULIF(MGR,7698) - 같은면 NULL    
+NVL(A,B)         -  A가 NULL이면 B
