@@ -421,158 +421,198 @@ mapper.xml
 
 	> 연습문제
 	연습문제) 프로젝트 새로만들기~!
-		Q1. spring 프로젝트 spring005 만드시오.
-		Q2. datasource설정하는 
-			root-context.xml 과  application.properties를 작성하시오.
-		Q3. ApplicationContext, DataSource를 테스트하시오.
-		Q4. mybatis를   
-			root-context.xml 에 설정하고 mybatis 테스트를 하시오.
-		Q5. table 작성 - sql 기본구문 5개 작성
-		Q6. dto 작성
-		Q7. dao 작성
-		Q8. dao 테스트
+	■	Q1. spring 프로젝트 spring005 만드시오.  ____1
+	■	Q2. datasource설정하는 	root-context.xml 과  application.properties를 작성하시오.
+	■	Q3. ApplicationContext, DataSource를 테스트하시오.
+	■	Q4. mybatis를   root-context.xml 에 설정하고 mybatis 테스트를 하시오.  ____2
+	■	Q5. table 작성 - sql 기본구문 5개 작성  (oracle에서 테스트하기)
+		SQL> desc sboard1;
+		Name                                      Null?    Type
+		----------------------------------------- -------- ----------------------------
+		ID                                        NOT NULL NUMBER
+		APP_USER_ID                               NOT NULL NUMBER
+		BTITLE                                    NOT NULL VARCHAR2(1000)
+		BCONTENT                                  NOT NULL CLOB
+		BPASS                                     NOT NULL VARCHAR2(255)
+		BFILE                                              VARCHAR2(255)   
+		BHIT                                               NUMBER(10)      default  0
+		BIP                                       NOT NULL VARCHAR2(255)
+		CREATED_AT                                          TIMESTAMP(6)    default sysdate
+
+		■ insert : 
+			insert into sboard1 (             ID , APP_USER_ID , BTITLE , BCONTENT , BPASS , BIP)  
+			values     (     sboard1_seq.nextval ,  21, 'title','content','1111' ,'127.0,0,1' );
+		■ selectAll
+			select * from sboard1  order by id desc;
+		■ select
+			select * from sboard1 where id=4;
+		■ update
+			update  sboard1  
+			set     BTITLE='new1' , BCONTENT='content1'  
+			where   id=4  and BPASS='1111';
+		■ delete
+			delete from sboard1 where   id=4    and   BPASS='1111';
+
+
+	CREATE SEQUENCE sboard1_seq; 
+	CREATE TABLE sboard1 (
+		id          NUMBER PRIMARY KEY,
+		app_user_id   NUMBER NOT NULL ,
+		btitle      VARCHAR2(1000)  NOT NULL,
+		bcontent    CLOB   NOT NULL,
+		bpass       VARCHAR2(255)   NOT NULL,
+		bfile       VARCHAR2(255)  default  'no.png' ,
+		bhit        NUMBER(10) default 0,
+		bip         VARCHAR2(255)   NOT NULL,
+		created_at   TIMESTAMP(6)    default sysdate
+		-- create_at   DATE    default sysdate
+		-- created_at TIMESTAMP(6) DEFAULT   SYSTIMESTAMP
+	);
+
+	create sequence  sboard1_seq;
 
 
 
+	■   Q6. dto 작성    
+	■   Q7. dao 작성   
+	■   Q8. dao 테스트
 
-
-
-
-
-
-
-
-<!-- 수정 -->
-<!-- 수정 -->
-<dependencies>
-	<!-- https://mvnrepository.com/artifact/junit/junit -->
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.12</version>
-		<scope>test</scope>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-context</artifactId>
-		<version>4.3.27.RELEASE</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-test</artifactId>
-		<version>4.3.27.RELEASE</version>
-		<scope>test</scope>
-	</dependency>
-	
-	<!--  MYSQL + CONNECTOR-J		 -->
-	<dependency>
-		<groupId>com.oracle.database.jdbc</groupId>
-		<artifactId>ojdbc11</artifactId>
-		<version>21.9.0.0</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-	<dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
-	    <version>8.0.28</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-jdbc</artifactId>
-	    <version>4.3.20.RELEASE</version>
-	</dependency>
+	-------
+	■   Q9. resultMap
+	■  Q10. 중간 sql 로그
+		1. pom.xml
+			<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4 -->
+			<dependency>
+				<groupId>org.bgee.log4jdbc-log4j2</groupId>
+				<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+				<version>1.16</version>
+			</dependency>
+					
+			<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.17.2</version>
+			</dependency>
+			<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.17.2</version>
+			</dependency> 
+			<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>2.17.2</version>
+			</dependency>
 			
-	<!-- MYBATIS -->
-	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-	<dependency>
-	    <groupId>org.mybatis</groupId>
-	    <artifactId>mybatis</artifactId>
-	    <version>3.5.6</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
-	<dependency>
-	    <groupId>org.mybatis</groupId>
-	    <artifactId>mybatis-spring</artifactId>
-	    <version>2.0.6</version>
-	</dependency>
-	
-	<!-- webmvc -->
-	<!-- webmvc -->
-	<!-- webmvc -->
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-webmvc</artifactId>
-	    <version>3.2.17.RELEASE</version>
-	</dependency>
-	
-    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
-    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
-	<dependency>
-		<groupId>javax.servlet</groupId>
-		<artifactId>jstl</artifactId>
-		<version>1.2</version>
-	</dependency>
-			
-	<!-- LOMBOK  -->		
-	<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-	<dependency>
-	    <groupId>org.projectlombok</groupId>
-	    <artifactId>lombok</artifactId>
-	    <version>1.18.18</version>
-	    <scope>provided</scope>
-	</dependency>				
-			
-	<!-- AOP -->	
-	<!-- AOP -->		
-	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
-	<dependency>
-	    <groupId>org.aspectj</groupId>
-	    <artifactId>aspectjrt</artifactId>
-	    <version>1.7.3</version>
-		<!-- <scope>runtime</scope> -->
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-	<dependency>
-	    <groupId>org.aspectj</groupId>
-	    <artifactId>aspectjweaver</artifactId>
-	    <version>1.7.3</version>
-	 	<!-- <scope>runtime</scope> -->
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-aop</artifactId>
-	    <version>4.3.28.RELEASE</version>
-	</dependency>
-			
-			
-	<!-- HikariCP -->
-	<!-- HikariCP -->
-	<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
-	<dependency>
-	    <groupId>com.zaxxer</groupId>
-	    <artifactId>HikariCP</artifactId>
-	    <version>2.7.4</version>
-	</dependency>
+
+		2.   pom.xml    build
+		<build>
+			<resources>
+				<resource>
+				<directory>src/main/resources</directory>
+				</resource>
+			</resources> 
+
+
+		3.   src/main/resources   안에
+		소스파일들
 		
-	<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4 -->
-	<dependency>
-	    <groupId>org.bgee.log4jdbc-log4j2</groupId>
-	    <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
-	    <version>1.16</version>
-	</dependency>
-	<!-- HikariCP -->
-	<!-- HikariCP -->
-	<!-- HikariCP --> 			
-			
-</dependencies>
-<!-- 수정 -->
-<!-- 수정 -->  
- 
+		log4j2.properties
+		log4jdbc.log4j2.properties
+
+
+		4. root-context.xml
+				<context:property-placeholder    location="classpath:config/db.properties"/>
+			<bean  id="datasource" class="com.zaxxer.hikari.HikariDataSource">
+				<property name="driverClassName"  value="${db.driverClass}"  />
+				<property name="jdbcUrl"  		  value="${db.url}"  />
+				<property name="username"     value="${db.username}"  />
+				<property name="password"     value="${db.password}"  />
+			</bean>
+
+		5.  db.properties
+		db.driverClass=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+		db.url=jdbc:log4jdbc:oracle:thin:@localhost:1521:xe
+
+	■  Q11. service
+
+	-------
+	■  Q12. controller
+		MVC
+		>> 서로 영향없이 고칠수 있는 애플리케이션을 만들수 있음.
+		- MODEL :  DB    ( TABLE, DTO , DAO , SERVICE )
+		- VIEW  :  화면   ( html, css, js/jquery  )
+		- CONTROLLER : MODEL과 VIEW 사이의 관리
+
+		>> MVC1  VS  MVC2
+
+		>> Frontcontroller
+		[클라이언트]  →  [Frontcontroller *.do]	 →  세부Controller  → View
+											→  세부Controller  → View
+											→  세부Controller  → View		
+		1.  Frontcontroller - 공통작업먼저수행
+		2.  세부Controller 작업 View 최종결과 생성
+
+		>> SPRING MVC
+		[클라이언트] 
+			↓        
+		[Frontcontroller] <<DispatcherServlet>> 
+			↓ ↑				Handler Mapping  @Controller    → View (ViewResolver)
+			세부Controller  
+			세부Controller   
+			세부Controller  - db연동
+
+		1) 클라이언트 요청
+		2) DispatcherServlet - Handler Mapping  @Controller
+		3) Controller 클라이언트의 요청처리
+		4)  DispatcherServlet - ViewResolver 통해서 응답결과 처리
+
+		[실습]
+		1. [pom.xml] - spring-webmvc , jstl / jackson-mapper-asl
+		2. [web.xml] - ContextLoaderListener(스프링구동) / DispatcherServlet (FrontController)
+		3. [servelt-context.xml]  Controller위치설정,  ViewResolver
+		4. [controller] list.do (처리,view) ,,,, 설정
+			*1) 경로설정
+			*2) view 연동확인
+			*3) 알림창설정
+			*4) servicec연동
+
+
+		[연습문제1 : requestMpping]
+		/list.quest            /view/quest_board/list.jsp 
+		/write.quest           /view/quest_board/write.jsp    (글쓰기폼)
+		/detail.quest          /view/quest_board/detailjsp    (상세보기)
+		/edit.quest            /view/quest_board/edit.jsp     (수정하기폼)
+		/delete.quest          /view/quest_board/delete.jsp   (삭제하기폼)
+
+		[연습문제2 : 알림창]
+		//Q1. 수정기능도    비밀번호를 확인해주세요 알림창 + /detail.quest  경로넘기기 
+		@RequestMapping(value="/edit.quest" , method=RequestMethod.POST) //수정기능
+		
+		//Q2. 삭제기능도   비밀번호를 확인해주세요 알림창 + /list.quest  경로넘기기
+		@RequestMapping(value="/delete.quest" , method=RequestMethod.POST) //삭제기능 
+
+
+
+	■  Q13. view (JSTL 작성)
+		1. [view] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
