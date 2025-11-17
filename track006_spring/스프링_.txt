@@ -595,10 +595,68 @@ mapper.xml
 
 
 	■  Q13. view (JSTL 작성)
-		1. [view] 
+		[view] 
+			q1. list 
+			q2. list에서 btitle에 상세보기링크
+			q3. 상세보기
+			q4. 수정하기
 
+						
 
+	연습문제1) 프로젝트 새로만들기~!
+	■	Q1. spring 프로젝트 ex006 만드시오.  
+	■	Q2. datasource설정하는 	root-context.xml 과  application.properties를 작성하시오.
+	■	Q3. ApplicationContext, DataSource를 테스트하시오.
+	■	Q4. mybatis를   root-context.xml 에 설정하고 mybatis 테스트를 하시오. 
+	//////////////////////////////////////////////////////////////////////////////////
 
+	■	Q5. table 작성 - sql 기본구문 5개 작성  (oracle에서 테스트하기)
+		SQL>
+		SQL> desc appuser;
+		Name                                      Null?    Type
+		----------------------------------------- -------- ----------------------------
+		APP_USER_ID                               NOT NULL NUMBER(5)
+		EMAIL                                     NOT NULL VARCHAR2(100)
+		PASSWORD                                           VARCHAR2(100)
+		MBTI_TYPE_ID                                       NUMBER(3)
+		CREATED_AT                                         DATE
+
+		desc appuser;
+		--		create : 회원가입 (시퀀스이용)
+		insert into appuser (APP_USER_ID , EMAIL, PASSWORD, MBTI_TYPE_ID)  
+		values (appuser_seq.nextval, 'a@a' , '1111',1);
+
+		--		read   : 로그인(이메일과 비번이 같으면 로그인) , 마이페이지 (세션이용), 전체 유저확인
+		select count(*) cnt from appuser  where  email='a@a'  and PASSWORD='1111';
+		select * from appuser   order by app_user_id desc; 
+		select * from appuser   where app_user_id=21; 
+		--
+		--		update : 마이페이지 정보수정 (mbti와 비밀번호 수정할수 있게)
+		update appuser  set  password='1234' , MBTI_TYPE_ID=2  where app_user_id=43; 
+		--		delete : 탈퇴
+		delete from appuser  where app_user_id=43  and password='1234'; 
+
+	■   Q6. dto 작성    
+	■   Q7. dao 작성   
+	■   Q8. dao 테스트 
+	■   Q9. 중간 sql 로그 - POM.XML 
+	------
+	■  Q10. service 
+	■  Q11. controller  
+		/join.users             /view/member/join.jsp    (회원가입)
+		/join.users             회원가입 기능후 /login.users 로 이동  (회원가입기능-post)
+		/login.users            /view/member/login.jsp    (로그인폼)
+		/login.users           로그인 기능후 /mypage.users   (로그인기능-post)
+		/mypage.users            /view/member/mypage.jsp     
+		////////////////////////////////////////////////////////////////////
+		/list.users            /view/member/list
+		/edit.users              /view/member/edit.jsp    (수정하기폼)
+		/edit.users            수정기능 후 /mypage.users   
+		/delete.users           삭제 기능후 list.users
+ 
+
+	■  Q12. view (JSTL 작성)
+		[view]  
 
 
 
