@@ -2,18 +2,38 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../inc/header.jsp" %>
-   <div class="container card  my-5">
+   <div class="container card  my-5 p-3">
       <h3  class="card-header"> MYPAGE </h3> 
-		<table class="table  table-striped  table-bordered  table-hover">
-			<tbody class="table-info ">
-				<tr> <th scope="row">Email</th>        <td>${dto.email}</td> </tr>
-				<tr> <th scope="row">MBTI TYPE</th>    <td>${dto.mbtiTypeId}</td> </tr>
-				<tr> <th scope="row">회원가입날짜</th>    <td>${dto.createdAt}</td></tr>
-			</tbody>
-		</table> 
-	  	<p><a href="${pageContext.request.contextPath}/edit.users?appUserId=${dto.appUserId}"  class="btn btn-danger">UPDATE</a></td>
- 		<p><a href="${pageContext.request.contextPath}/delete.users?appUserId=${dto.appUserId}"  
- 					class="btn btn-primary">DELETE</a></p>
+		<table class="table table-striped table-bordered table-hover align-middle">
+		  <colgroup>
+		    <col style="width:10%">   <!-- 이미지 열 -->
+		    <col style="width:30%">   <!-- 항목명 열 -->
+		    <col style="width:60%">   <!-- 값 열 -->
+		  </colgroup>		
+		  <tbody class="table-info">
+		    <tr>
+		      <!-- 왼쪽 이미지 셀: 3줄 병합 -->
+		      <td rowspan="3">
+		        <img src="${pageContext.request.contextPath}/upload/${dto.ufile}"   alt="" style="width:100%" />
+		      </td>
+		      <th scope="row">Email</th>
+		      <td>${dto.email}</td>
+		    </tr>
+		    <tr>
+		      <th scope="row">MBTI TYPE</th>
+		      <td>${dto.mbtiTypeId}</td>
+		    </tr>
+		    <tr>
+		      <th scope="row">회원가입날짜</th>
+		      <td>${dto.createdAt}</td>
+		    </tr>
+		  </tbody>
+		</table>
+	  	<div class="text-end">
+	  		<a href="${pageContext.request.contextPath}/edit.users?appUserId=${dto.appUserId}"  class="btn btn-danger">UPDATE</a>
+            <a href="${pageContext.request.contextPath}/delete.users?appUserId=${dto.appUserId}"  
+ 					class="btn btn-primary">DELETE</a>
+ 		 </div>
 	</div>
 <%@ include file="../inc/footer.jsp" %>
 

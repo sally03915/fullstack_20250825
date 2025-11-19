@@ -44,6 +44,56 @@
 			<a href="${pageContext.request.contextPath}/write.quest" class="btn btn-primary">글쓰기</a>
 		</p>	 
 		<p class="text-end alert alert-primary">로그인을 하면 글쓰기가능합니다.</p> 
+		
+	  <div class="mb-3 mt-3 alert alert-primary">
+	    <label for="search" class="form-label">	SEARCH</label>
+	    <input type="search" class="form-control" id="search"  placeholder="검색어를 입력해주세요" name="search">
+	    <!-- 						 -->
+	    <!-- 						 -->
+	    <div  id="resultArea">
+	      <table class="table table-striped table-bordered table-hover  my-3">
+		    <caption>mbti</caption>
+		    <thead>
+		      <tr>
+		        <th scope="col">NO</th>
+		        <th scope="col">TITLE</th>
+		        <th scope="col">NAME</th>
+		        <th scope="col">DATE</th>
+		        <th scope="col">HIT</th>
+		      </tr> 
+		    </thead>
+		    <tbody>
+		      <!-- AJAX 결과가 여기에 들어감 -->
+		    </tbody>
+		  </table> 
+	    </div>
+	    <!-- 						 -->
+	    <!-- 						 -->	    	
+	  </div>		
+	  <script>
+	  $(function(){
+		  $("#search").on("keyup" , function(){  
+				console.log( $(this).val().trim()  ); 
+				let keyword = $(this).val().trim();
+				if(keyword.length === 0){
+					$("#resultArea  tbody").empty().append('<tr><td colspan="5">검색어를 입력하세요.</td></tr>');
+					return;
+				}else{
+					
+					$.ajax({
+						url:"${pageContext.request.contextPath}/selectSearch",
+						type:"GET",
+						data:{  search : keyword },
+						success:function(res){
+							console.log(res);
+							$("#resultArea  tbody").append(res);
+						}
+					});
+				}
+		  });
+	  });
+	  </script>	
+		
    </div>
    
 <%@include file="../inc/footer.jsp" %>

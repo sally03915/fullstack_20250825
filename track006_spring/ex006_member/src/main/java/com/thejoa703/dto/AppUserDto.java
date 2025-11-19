@@ -9,6 +9,7 @@ public class AppUserDto {
 	private String password;
 	private int mbtiTypeId;
 	private String createdAt;
+	private String ufile;
 }
 
 /*

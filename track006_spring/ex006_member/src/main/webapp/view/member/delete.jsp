@@ -22,4 +22,8 @@
    
 <%@include file="../inc/footer.jsp" %>
 
-<!-- [ mbtiBoard - list.jsp ]  -->
+<!-- [ mbtiBoard - list.jsp ]  
+    1. 빈칸 알림창  - 빈칸입니다. 알림창 + 커서가게
+	2. spring 에서  ajax 사용법  
+	3. 로그인중복 - dao / service / controller  
+-->

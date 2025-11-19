@@ -10,11 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <style>
-  .fakeimg {
-    height: 200px;
-    background: #aaa;
-  }
+  <style> .fakeimg { height: 200px; background: #aaa; }  
   </style>
 </head>
 <body>
@@ -29,29 +25,25 @@
     <ul class="navbar-nav"> 
     <c:if test="${not empty sessionScope.email}">
     	  <li class="nav-item">
-	        <a class="nav-link" href="${pageContext.request.contextPath}/list.users">유저관리</a>
+	        <a class="nav-link"   href="${pageContext.request.contextPath}/list.users">유저관리</a>
 	      </li>  
     	  <li class="nav-item">
-	        <a class="nav-link" href="${pageContext.request.contextPath}/mypage.users">${sessionScope.email}</a>
+	        <a class="nav-link"   href="${pageContext.request.contextPath}/mypage.users">${sessionScope.email}</a>
 	      </li>  
 	      <li class="nav-item">
-	        <a class="nav-link" href="${pageContext.request.contextPath}/logout.users">로그아웃</a>
+	        <a class="nav-link"   href="${pageContext.request.contextPath}/logout.users">로그아웃</a>
 	      </li>    
 	</c:if>
 	
-	<c:if test="${empty sessionScope.email}">
-
+	<c:if test="${empty sessionScope.email}"> 
 	      <li class="nav-item">
-	        <a class="nav-link" href="${pageContext.request.contextPath}/login.users">LOGIN</a>
+	        <a class="nav-link"    href="${pageContext.request.contextPath}/login.users">LOGIN</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="${pageContext.request.contextPath}/join.users">JOIN</a>
+	        <a class="nav-link"    href="${pageContext.request.contextPath}/join.users">JOIN</a>
 	      </li> 
 	</c:if>	         
-	      <li class="nav-item">
-	        <a class="nav-link" href="">Quest Board</a>
-	      </li>  
-	      
+	      <li class="nav-item">   <a class="nav-link" href="">Quest Board</a>  </li>   
     </ul> 
   </div>
 </nav>

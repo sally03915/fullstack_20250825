@@ -12,4 +12,8 @@ public interface AppUserDao {
 	public AppUserDto  select(int appUserId);
 	public AppUserDto  selectEmail(String email);
 	public int  selectLogin(AppUserDto dto);
+	
+	/* upload */
+	public int  insert2(AppUserDto dto);
+	public int  update2(AppUserDto dto);
 }
