@@ -33,8 +33,7 @@
 	      <li class="nav-item">
 	        <a class="nav-link"   href="${pageContext.request.contextPath}/logout.users">로그아웃</a>
 	      </li>    
-	</c:if>
-	
+	</c:if> 
 	<c:if test="${empty sessionScope.email}"> 
 	      <li class="nav-item">
 	        <a class="nav-link"    href="${pageContext.request.contextPath}/login.users">LOGIN</a>

@@ -18,7 +18,7 @@ import com.thejoa703.service.Sboard1Service;
 public class QuestController { 
 	
 	@Autowired   Sboard1Service service;
-	
+	/////////////////////////////////////////
 	@RequestMapping("/list.quest")   //       
 	public String list(Model model) { 
 		model.addAttribute("list", service.selectAll());   // 처리하고

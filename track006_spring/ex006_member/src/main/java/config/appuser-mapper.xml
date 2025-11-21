@@ -52,4 +52,20 @@
 	</update>
 	<!-- upload -->
 	<!-- upload -->
+	
+	<!-- 아이디중복검사  -->
+	<select resultType="int"  id="iddouble"  parameterType="String">
+	select count(*) cnt from appuser  where email=#{email}
+	</select>
+	
+	<!-- 관리자 해당유저  -->
+	<!-- 관리자 해당유저  -->
+	<delete id="deleteAdmin"  parameterType="AppUserDto">
+		delete from appuser where app_user_id=#{appUserId}   
+	</delete>
+	<update id="updateAdmin"  parameterType="AppUserDto">
+		update appuser  set  MBTI_TYPE_ID=#{mbtiTypeId}  
+		where app_user_id=#{appUserId}
+	</update>
+		
 </mapper>

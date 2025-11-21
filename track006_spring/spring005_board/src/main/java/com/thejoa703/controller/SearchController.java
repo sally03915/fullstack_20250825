@@ -16,7 +16,8 @@ public class SearchController {
 	
 	@RequestMapping("/searchTest") 
 	public String hi() { 
-		return "Hi";  //값줄께
+		// 처리하고
+		return "Hi"; //값줄께
 	} 
 	
 	// http://localhost:8282/spring005_board/selectSearch?search=t 
@@ -26,8 +27,7 @@ public class SearchController {
 	}  
 }
 
-
-
+ 
 //////// step1)
 /*
 @Controller

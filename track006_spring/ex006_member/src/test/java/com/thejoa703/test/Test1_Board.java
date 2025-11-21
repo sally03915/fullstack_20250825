@@ -25,6 +25,27 @@ public class Test1_Board {
 	@Autowired  SqlSession   session; 
 	@Autowired  AppUserDao   dao;
 	@Autowired  AppUserService  service; 
+
+	@Test  public void test7() {
+		//4. 삭제
+		AppUserDto dto = new AppUserDto();   dto.setAppUserId(67);
+		System.out.println(dao.deleteAdmin(dto));
+		//3. 해당값유저확인
+		System.out.println(dao.select(67));
+		//2. 수정
+		//    	AppUserDto dto = new AppUserDto();
+		//    	dto.setMbtiTypeId(3);      dto.setAppUserId(67);
+		//    	System.out.println(dao.updateAdmin(dto));   
+    	//1. 전체
+		System.out.println(dao.selectAll());
+		//(appUserId=67, email=d@d, password=1, mbtiTypeId=1, createdAt=2025-11-20 14:30:51, ufile=user7.png
+	}
+	
+	@Ignore @Test  public void test6() {
+		System.out.println(dao.iddouble("1@1"));   //1
+		System.out.println(dao.iddouble("9@9"));   //0
+	}
+	
 	@Ignore @Test  public void test5() { 
     	//.....................
     	AppUserDto dto = new AppUserDto();

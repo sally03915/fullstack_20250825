@@ -9,6 +9,44 @@
 			<label  for="email" class="form-label">Email:</label> 
 			<input  type="email" class="form-control" id="email"
 					placeholder="이메일을 입력해주세요" required  name="email">
+			<div class="iddouble_result"></div>	
+			<script>
+			$(function(){
+				//1. 대상찾아오기   아이디가 이메일의 값을 찾아오려고함. 
+					console.log( "1. " +  (0 ==  false )   );   // true   자동형변환
+					console.log( "2. " +  (0 === false )   );   // false  자료형까지
+					console.log( "3. " +  (0 ==  "" )   );   // true   자동형변환
+					console.log( "4. " +  (0 === "" )   );   // false  자료형까지 
+					
+				$("#email").on("keyup" , function(){
+					console.log( $(this).val().trim() ); 
+					let keyword = $(this).val().trim();
+ 
+					
+					if(keyword === ""){// 만약 빈칸인지 검사
+						$(".iddouble_result").empty().append("<span  class='text-danger p-3'>이메일을 입력해주세요</span>");
+						return;
+					}else{ // 아니라면 ajax  - iddouble /POST / email / 
+						$.ajax({
+							url:"${pageContext.request.contextPath}/iddouble",
+							type:"POST",
+							data:{email : keyword} , 
+							success:function( res ){  //res = {cnt: 1}
+								console.log(res);  
+								if(res.cnt == 1 ){
+									$(".iddouble_result").empty().append("<span  class='text-danger p-3'>이미 사용중인 이메일입니다.</span>");
+								}else{
+									$(".iddouble_result").empty().append("<span  class='text-success p-3'>사용가능한 이메일입니다.</span>");
+								}
+							} ,
+							error:function( ){
+								$(".iddouble_result").empty().append("<span  class='text-danger p-3'>서버요청 중 오류가 발생했습니다.</span>");
+							}
+						});
+					}
+				}); 
+			});
+			</script>	
 		</div>
 		<div class="mb-3">
 			<label for="password" class="form-label">Password:</label> 

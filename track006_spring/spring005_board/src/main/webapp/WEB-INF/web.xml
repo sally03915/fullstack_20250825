@@ -9,6 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <!-- 	1. 스프링구동	ContextLoaderListene --> 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -17,6 +18,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener> 
+  
   <!-- 	2. DispatcherServlet	 -->
   	<servlet>
 		<servlet-name>springDispatcherServlet</servlet-name>
