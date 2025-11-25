@@ -42,7 +42,9 @@
 	        <a class="nav-link"    href="${pageContext.request.contextPath}/join.users">JOIN</a>
 	      </li> 
 	</c:if>	         
-	      <li class="nav-item">   <a class="nav-link" href="">Quest Board</a>  </li>   
+	      <li class="nav-item">   
+	      	<a class="nav-link" href="${pageContext.request.contextPath}/list.quest">Quest Board</a>  
+	      </li>   
     </ul> 
   </div>
 </nav>
