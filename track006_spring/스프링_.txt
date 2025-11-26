@@ -1255,3 +1255,50 @@ controller
 2. 	설정내용  com.thejoa703.security 
 3.  Controller - 로그인
 4.  view       - login.jsp
+
+
+Question)
+□Q1. 로그인한 사람만 글쓰기 버튼보이게 만들기
+    ※ 힌트)  header.jsp
+     list.jsp   <sec:authorize   access="isAuthenticated()"> 
+
+□Q2. 글수정하기  ※ 힌트) 이미지처리
+     @RequestMapping(value="/join"  ,  method=RequestMethod.POST  ,  headers=("content-type=multipart/*")  )
+
+□Q3. 글삭제  ※ 힌트)   form    > csrt
+        <input  type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+
+□Q4. 회원가입시 >  
+        기본 - 멤버권한등급주기 ROLE_MEMBER 
+       model      - dao , service(  insert3  >   dao :   insert2 +   insertAuth    )
+       controller 4-1. get : security/join  회원가입폼으로 넘어가기   
+                     4-2. post : security/join  회원가입기능
+		@PreAuthorize("isAuthenticated()") //4. 로그인했다면
+		@RequestMapping(value="/join" 
+			,  method=RequestMethod.POST 
+			,  headers=("content-type=multipart/*")  )  
+			 서비스기능활용: service(  insert3  >   dao :   insert +   insertAuth    )
+       view :  <input  type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />	
+
+
+※ 포트폴리오
+
+
+
+---------------------
+#12. project
+---------------------
+[ 포폴 프로젝트만들기 ]
+Q1. project2 프로젝트만들기
+	1. dynamic web project - project2
+	2. configure  - [Convert to Maven Project]
+	3. spring      - add Spring project Nature 
+	4. java se-11 / project facts, build path
+
+Q2. pom.xml  셋팅
+
+Q3.       db 셋팅 [root-context.xml] - 테스트확인
+
+Q4. security 셋팅    
+
+Q5. 각자파트 작성

@@ -6,6 +6,7 @@
   <form action="${pageContext.request.contextPath}/updateEdit.quest"  
   		method="post"  encType="multipart/form-data"  > 
      <input type="hidden"   name="id"  value="${dto.id}">  
+	 <input  type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 	  <div class="mb-3 mt-3">
 	    <label for="btitle" class="form-label">TITLE:</label>
 	    <input type="text" class="form-control" id="btitle" 

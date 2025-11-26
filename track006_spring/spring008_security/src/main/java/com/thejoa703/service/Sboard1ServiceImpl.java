@@ -75,6 +75,8 @@ public class Sboard1ServiceImpl  implements Sboard1Service{
 		return dao.select10(para);
 	}
 	@Override public int selectTotalCnt() { return dao.selectTotalCnt(); }
+	
+	
 }
 
 

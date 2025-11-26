@@ -21,8 +21,12 @@ public class LoginSuccessHandler implements  AuthenticationSuccessHandler{  //##
 		authentication.getAuthorities().forEach(auth -> {
 			roles.add(auth.getAuthority());
 		});
-		if(roles.contains("ROLE_ADMIN"))  {  response.sendRedirect(request.getContextPath() + "/security/admin");   return; }
-		if(roles.contains("ROLE_MEMBER")) {  response.sendRedirect(request.getContextPath() + "/security/member");  return; }
-		response.sendRedirect("/"); 
+		
+		// 각각의 유저처리
+		//		if(roles.contains("ROLE_ADMIN"))  {  response.sendRedirect(request.getContextPath() + "/security/admin");   return; }
+		//		if(roles.contains("ROLE_MEMBER")) {  response.sendRedirect(request.getContextPath() + "/security/member");  return; }
+		//		response.sendRedirect("/"); 
+		response.sendRedirect(request.getContextPath() + "/security/mypage");
+		
 	} 
 }

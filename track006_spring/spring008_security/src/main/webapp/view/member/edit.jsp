@@ -8,6 +8,7 @@
 	<form action="${pageContext.request.contextPath}/uploadEdit.users" 	
 		method="post"  encType="multipart/form-data" > 
 	    <input type="hidden"   name="appUserId"  value="${dto.appUserId}"> 
+	    <input  type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 		<div class="mb-3 mt-3">
 			<label  for="email" class="form-label">Email:</label> 
 			<input  type="email" class="form-control" id="email"

@@ -7,7 +7,9 @@
       <h3 class="card-header"> MBTI 탈퇴</h3>
 	  <%-- <form action="${pageContext.request.contextPath}/delete.do?id=${param.id}"     method="post">  --%> 
 	  <form action="${pageContext.request.contextPath}/delete.users"  method="post">  
+	  	  <input  type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 	      <input type="hidden"   name="appUserId"  value="${param.appUserId}"> 
+	      <input type="hidden"   name="email"  	   value="<sec:authentication  property="principal.dto.email"  />"> 
 		  <div class="my-3">
 		    <label for="password" class="form-label">PASS:</label>
 		    <input type="password" class="form-control" 

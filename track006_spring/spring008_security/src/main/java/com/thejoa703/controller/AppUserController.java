@@ -1,9 +1,14 @@
 package com.thejoa703.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,6 +78,7 @@ public class AppUserController {
 		model.addAttribute("dto",  service.select(appUserId));
 		return "member/edit"; 
 	}  
+	
 	@RequestMapping(value="/edit.users" , method=RequestMethod.POST) //수정기능
 	public String edit_post(  AppUserDto dto ,  RedirectAttributes rttr) { 
 		String result = "비밀번호를 확인해주세요";
@@ -86,6 +92,7 @@ public class AppUserController {
 		return "member/delete"; 
 	}
 	
+	/*
 	@RequestMapping(value="/delete.users" , method=RequestMethod.POST) //삭제기능
 	public String delete_post(AppUserDto dto , RedirectAttributes rttr ,HttpServletRequest  request) { 
 		String result = "비밀번호를 확인해주세요";
@@ -96,8 +103,9 @@ public class AppUserController {
 		rttr.addFlashAttribute("success" , result);
 		
 		return "redirect:/login.users"; 
-	}  
+	}  */
 	/*  UPLOAD	 */
+	/*
 	@RequestMapping(value="/uploadJoin.users" , method=RequestMethod.POST)
 	public String uploadJoin_post( @RequestParam("file") MultipartFile file   
 			,  AppUserDto dto ,  RedirectAttributes rttr) { 
@@ -112,6 +120,35 @@ public class AppUserController {
 			,  AppUserDto dto ,  RedirectAttributes rttr) { 
 		String result = "비밀번호를 확인해주세요";
 		if( service.update2(file,dto)  > 0  ) {  result ="수정 성공"; }
+		rttr.addFlashAttribute("success" , result);
+		return "redirect:/mypage.users"; 
+	}*/
+	/*	Security	*/
+	/*	Security	*/
+
+
+	
+	@PreAuthorize("isAuthenticated()") 
+	@RequestMapping(value="/delete.users" , method=RequestMethod.POST) //삭제기능
+	public String delete_post(AppUserDto dto , RedirectAttributes rttr 
+			,HttpServletRequest  request ,HttpServletResponse  response) { 
+		String result = "비밀번호를 확인해주세요";
+		if( service.delete3(dto)  > 0  ) {  // 삭제 성공 → 로그아웃 처리 
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	        if (auth != null) { new SecurityContextLogoutHandler().logout(request, response, auth); }
+	        result = "회원탈퇴가 완료되었습니다.";
+	        
+	    } else { result = "비밀번호를 확인해주세요."; }
+		rttr.addFlashAttribute("success" , result); 
+		return "redirect:/security/login"; 
+	}  
+
+	@PreAuthorize("isAuthenticated()") 
+	@RequestMapping(value="/uploadEdit.users" , method=RequestMethod.POST  ,  headers=("content-type=multipart/*")) //수정기능
+	public String uploadEdit_post(  @RequestParam("file") MultipartFile file   
+			,  AppUserDto dto ,  RedirectAttributes rttr) { 
+		String result = "비밀번호를 확인해주세요";
+		if( service.update3(file,dto)  > 0  ) {  result ="수정 성공"; }
 		rttr.addFlashAttribute("success" , result);
 		return "redirect:/mypage.users"; 
 	}
