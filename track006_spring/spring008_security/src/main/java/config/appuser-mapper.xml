@@ -87,6 +87,12 @@
 		outer join authorities a on u.email = a.email where u.email = #{email}
 	</select> 
 	
+
+	<update id="update3"  parameterType="AppUserDto">
+		update appuser  set  MBTI_TYPE_ID=#{mbtiTypeId}   ,UFILE=#{ufile , jdbcType=VARCHAR}
+		where app_user_id=#{appUserId}
+	</update>	
+	
 </mapper>
 
 

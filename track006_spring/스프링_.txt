@@ -1281,8 +1281,6 @@ Question)
        view :  <input  type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />	
 
 
-※ 포트폴리오
-
 
 
 ---------------------
@@ -1294,11 +1292,26 @@ Q1. project2 프로젝트만들기
 	2. configure  - [Convert to Maven Project]
 	3. spring      - add Spring project Nature 
 	4. java se-11 / project facts, build path
-
 Q2. pom.xml  셋팅
-
-Q3.       db 셋팅 [root-context.xml] - 테스트확인
-
+Q3.       db 셋팅 [root-context.xml] - 테스트확인  
 Q4. security 셋팅    
+	SQL> desc appuser;
+	Name                                      Null?    Type
+	----------------------------------------- -------- ----------------------------
+	APP_USER_ID                               NOT NULL NUMBER(5)
+	EMAIL                                     NOT NULL VARCHAR2(100)
+	PASSWORD                                           VARCHAR2(100)
+	MBTI_TYPE_ID                                       NUMBER(3)
+	CREATED_AT                                         DATE
+	UFILE                                              VARCHAR2(255)
+	MOBILE                                             VARCHAR2(50)
+
+	4-1. 테이블 : appuser    mobile 필드추가 - null 
+	4-2. dto
+	4-3. Dao 필요한 sql
+	4-4. Service
+	4-5. Controller
+
 
 Q5. 각자파트 작성
+

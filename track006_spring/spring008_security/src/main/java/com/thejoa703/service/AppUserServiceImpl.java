@@ -108,8 +108,11 @@ public class AppUserServiceImpl  implements AppUserService{
     
 	@Override public int update3(MultipartFile file, AppUserDto dto) { 
         // DB에서 사용자 정보 조회
-        AppUserAuthDto ddto = new AppUserAuthDto(); ddto.setEmail(dto.getEmail());
+        AppUserAuthDto ddto = new AppUserAuthDto(); ddto.setEmail(dto.getEmail()); 
+        System.out.println("............update"+  dto);
+        System.out.println("............update"+  ddto);
         AppUserAuthDto dbUser = dao.readAuth(ddto);  
+        System.out.println("............update"+  dbUser);
         if (dbUser == null) { return 0; }// 사용자 없음 
         // 입력한 비밀번호(raw)와 DB 비밀번호(encoded) 비교 
         
@@ -124,7 +127,7 @@ public class AppUserServiceImpl  implements AppUserService{
 					   dto.setUfile(fileName); 
 				   }catch (IOException e) { e.printStackTrace(); }
 			   } 
-			   return dao.updateAdmin(dto);
+			   return dao.update3(dto);
         }else {  return 0; }// 비밀번호 불일치
 	} 
 }
