@@ -65,6 +65,8 @@ DI (   Dependency Injection :  의존성 주입  )
 [    AOP	] [   ORM -DAO-Mybatis,Jpa	] [Spring web MVC] ......
 [			Spring Core		    ] 
 
+
+
 실습1)  spring1     [◎ 프로젝트명 : spring001]
   1. 스프링 3버젼 다운로드
   2. 다운로드 경로
@@ -117,6 +119,33 @@ DI (   Dependency Injection :  의존성 주입  )
     1-2. 롬복이용해서  @Data로 설정 -   생성자, getters/setters, toString
         [com.company.ex2] - [UserInfo]  private int no;  private String name;  private int age;
 
+
+	6. JUNIT 
+	- 테스트
+	- @Test       테스트를 수행  O
+	@Ignore    수행 X
+
+	@Before      @Test 실행 되기전에 반드시 실행
+	@After        @Test 실행 된 후에 반드시 실행
+	@BeforeClass      @Test 실행 되기전에 한번만 사용시
+	@AfterClass        @Test 실행 된 후에 한번만 사용시
+
+			@BeforeClass     
+					↓
+	@Before →  @Test   →  @After
+	@Before →  @Test   →  @After 
+					↓
+			@AfterClass  
+
+	7. 사용메서드
+	- 테스트결과를 확인하는 단정(  assert ) 메서드
+	* assertEquals(a,b)     객체 A와 B가 일치함
+			a 기대되는 결과값
+			b 값넣어주기 - 메서드 호출하는 값 
+
+	* assertSame(a,b)     객체 A와 B가 같은지 확인
+			a  객체1
+			b  객체2
 
 
 
@@ -314,6 +343,9 @@ ani=cat
 1.  xml   vs  Annotation
 >> xml : 운영
 >> Annotation : 개발
+XML - [운영] , 모든 Bean을 명시적으로 xml에 등록
+    - 여러개발자가 같은 설정파일을 공유해서 개발하면 
+      수정시 충돌이 일어날 경우가 많음.
 
 2.@Component
 - @Component 일반적인 컴포넌트  <bean> 스프링이 관리하는 객체
@@ -331,6 +363,10 @@ ani=cat
 
 4. component-scan
 <context:component-scan  base-package="경로설정"/>
+
+
+
+
 
 ---------------------
 #4.   DB  + Mybatis
@@ -621,6 +657,18 @@ mapper.xml
 		MBTI_TYPE_ID                                       NUMBER(3)
 		CREATED_AT                                         DATE
 
+
+		CREATE TABLE appuser (
+			APP_USER_ID   NUMBER(5)    CONSTRAINT pk_appuser PRIMARY KEY,
+			EMAIL         VARCHAR2(100) NOT NULL,
+			PASSWORD      VARCHAR2(100),
+			MBTI_TYPE_ID  NUMBER(3),
+			CREATED_AT    DATE DEFAULT SYSDATE,
+			UFILE         VARCHAR2(255),
+			MOBILE        VARCHAR2(50),
+			NICKNAME      VARCHAR2(50)
+		);
+
 		desc appuser;
 		--		create : 회원가입 (시퀀스이용)
 		insert into appuser (APP_USER_ID , EMAIL, PASSWORD, MBTI_TYPE_ID)  
@@ -679,6 +727,9 @@ mapper.xml
 	BHIT                                               NUMBER(10)
 	BIP                                       NOT NULL VARCHAR2(255)
 	CREATED_AT                                         TIMESTAMP(6)
+
+
+
 
 	> dto :  bfile
 	> dao :  insert, update
@@ -1084,6 +1135,15 @@ SQL> desc appuser;
 #9. PAGING
 ---------------------
 1. 프로젝트 복사하기  ( spring005 복사해서 spring007_paging )
+      delete from sboard1;
+
+      insert into sboard1 ( ID    , APP_USER_ID , btitle, bcontent, bpass, bfile,  bip )
+      values  (  sboard1_seq.nextval , 1 , 'title', 'content', '1111', '',  '127.0.0.1' );
+
+      insert into sboard2 ( ID    , APP_USER_ID , btitle, bcontent, bpass, bfile,  bip )
+      select  sboard2_seq.nextval , APP_USER_ID , btitle, bcontent, bpass, bfile,  bip   from sboard2;
+	  
+
 2. 페이징?
 model
 	> table

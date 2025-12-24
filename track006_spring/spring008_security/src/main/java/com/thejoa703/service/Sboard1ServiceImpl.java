@@ -30,6 +30,8 @@ public class Sboard1ServiceImpl  implements Sboard1Service{
 	/* UPLOAD  */   
 	/* UPLOAD  */  	   
 	@Override public int insert2(MultipartFile file, Sboard1Dto dto) {
+
+	   dto.setBfile("no.jpg"); 	
 	   if(!file.isEmpty()) {  // 파일이 비어있는게 아니라면
 		   String fileName   = file.getOriginalFilename(); // 원본파일이름
 		   String uploadPath = "C:/file/";
@@ -45,6 +47,7 @@ public class Sboard1ServiceImpl  implements Sboard1Service{
 	}
 	@Override
 	public int update2(MultipartFile file, Sboard1Dto dto) {
+	   dto.setBfile("no.jpg"); 
 		// 기존에 bfile 이 있어서 값이 처리됨.
 	   if(  !file.isEmpty() ) {  // 파일이 비어있는게 아니라면
 		   String fileName   = file.getOriginalFilename(); // 원본파일이름

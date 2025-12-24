@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatGPT 테스트</title>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    
+</head>
+<body>
+    <h1>ChatGPT 테스트 페이지</h1>
+    <textarea id="userMessage" rows="4" cols="50">오늘 하루가 좀 벅찼지만 친구 와 저녁 먹고 기분이 좋아졌다</textarea><br>
+    <button id="sendBtn">전송</button>
+
+    <h2>응답:</h2>
+    <pre id="response"></pre>
+
+    <script>
+    $(document).ready(function() {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+
+        $("#sendBtn").click(function() {
+            var message = $("#userMessage").val();
+
+            $.ajax({
+                url: "/api/openai",
+                type: "POST",
+                data: JSON.stringify(message),
+                contentType: "application/json; charset=UTF-8",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader(header, token); // CSRF 토큰 추가
+                },
+                success: function(result) {
+                    $("#response").text(result);
+                },
+                error: function(xhr, status, error) {
+                    $("#response").text("에러 발생: " + xhr.responseText);
+                }
+            });
+        });
+    });
+
+    </script>
+</body>
+</html>

@@ -6,8 +6,6 @@
 	<artifactId>spring005_board</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
-
 	<dependencies> 
 		<dependency>
 			<groupId>com.sun.activation</groupId>

@@ -16,8 +16,7 @@ import com.thejoa703.service.UserService;
 @Controller
 public class UserController {
 	@Autowired  UserService service;
-	
-	
+	 
 	@RequestMapping(value="/users_json" , method=RequestMethod.GET)
 	public String home() { return "users_json"; }
 	

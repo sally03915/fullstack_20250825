@@ -1,0 +1,310 @@
+■■■■■■■■■■ 유희재 고객파트
+
+■ APPUSER 
+이름        널?       유형            
+--------- -------- ------------- 
+APPUSERID NOT NULL NUMBER        
+PASSWORD  NOT NULL VARCHAR2(100) 
+NICKNAME           VARCHAR2(50)  
+EMAIL              VARCHAR2(100) 
+MOBILE             VARCHAR2(20)  
+BFILE              VARCHAR2(225) 
+JOINDATE           DATE           
+
+
+1-1) create  [회원가입]
+...................................................
+
+INSERT INTO APPUSER (
+    APPUSERID, PASSWORD, NICKNAME, EMAIL, MOBILE, BFILE 
+) VALUES (
+    1, '1', '승현', '1@1', '010-1234-5678', '1.jpg' 
+);
+
+
+※ encode.encode()  비밀번호 암호화   
+※  모바일
+
+1    pass1     승현  1@1      '01012345678'   'user1.png'     
+2    pass2     제이  2@2      '0101231234'    'user2.png'    
+3    pass3     승희  2@2      '0101231235'    'user3.png'     
+...................................................
+
+1-2) read [로그인,마이페이지  ,아이디찾기/비밀번호찾기/ 전체유저정보확인]
+...................................................
+로그인sql
+    select     u.email, password, auth
+    from       appuser u    left join   authorities a   on  u.email = a.email  
+    where      u.email=#{email} 
+
+마이페이지  
+	SELECT * FROM APPUSER  WHERE APPUSERID = 1 
+※ mobile , bfile
+
+전체유저확인 (페이징 + ) 
+
+
+	  select  *
+	  from  (
+			select     row_number()   over (  order by  created_at desc )  as  rnum , 
+			id  , app_user_id , btitle, bcontent, bpass, bfile,  bip , bhit, created_at
+			from sboard1
+		)  A
+	where   A.rnum  between  #{start}   and #{end}
+
+
+아이디찾기   sql    
+    SELECT EMAIL FROM APPUSER WHERE MOBILE = '01012345678'   ( 동적 sql  모바일로도 검색 / 이메일로도 검색 )
+비밀번호      sql   
+    SELECT APPUSERID FROM APPUSER  WHERE EMAIL = :email AND MOBILE = :mobile;
+닉네임찾기   sql   #
+    SELECT COUNT(*) AS CNT  FROM APPUSER  WHERE NICKNAME = :nickname
+
+
+1-3) update 
+...................................................
+UPDATE APPUSER
+SET  nickname='nick'  , PASSWORD = '11',  BFILE   = '1.png'
+WHERE APPUSERID = 1;
+
+※ 1. 닉네임중복검사   :  view에서 중복검사해야함.
+※ 2. 사용자에게 해당id, 비밀번호 입력받아서 같은지 확인후 삭제
+ pwencoder.matches(dto.getPassword(), dbUser.getPassword())
+※ 3. 비밀번호암호화   :  encode.encode() 비밀번호는 암호화
+
+
+1-4) delete
+...................................................
+DELETE FROM APPUSER
+WHERE APPUSERID = 1;
+
+※ 사용자에게 해당id, 비밀번호 입력받아서 같은지 확인후 삭제
+ pwencoder.matches(dto.getPassword(), dbUser.getPassword())
+
+---
+■■■■■■■■■■  길상현 고객파트
+■ 요리파트
+> TODO1. SQL      
+> TODL2. 피그마 작성
+
+--- 길상현 요리파트
+CREATE TABLE recipes (
+    RECIPE_ID NUMBER PRIMARY KEY,
+    APPUSERID  NUMBER,
+    TITLE    VARCHAR2(255) NOT NULL,
+    CATEGORY VARCHAR2(100),   -- 전체, 한식, 양식, 중식
+    IMAGE VARCHAR2(255) DEFAULT 'user.png',   --  대표이미지 
+    COOK_TIME NUMBER DEFAULT 0,
+    DIFFICULTY VARCHAR2(50),
+    SERVINGS NUMBER DEFAULT 1,
+    DESCRIPTION VARCHAR2(4000),
+    INSTRUCTIONS VARCHAR2(4000),
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 생성일
+    UPDATED_AT TIMESTAMP,                           -- 수정일 (NULL이 기본)
+    VIEWS NUMBER DEFAULT 0,
+    FOREIGN KEY (APPUSERID)  REFERENCES APPUSER(APPUSERID)
+);
+
+CREATE TABLE recipes_ing (
+    RECIPE_ID NUMBER,
+    ingre_name varchar2(100),
+    ingre_num number 
+)
+
+
+...................................................
+-- 3. 레시피 추가 (INSERT)
+> 최대레시피번호 
+select max(RECIPE_ID)+1 from recipes 
+ 
+
+> 레시피등록
+INSERT INTO recipes (
+    RECIPE_ID,       APPUSERID  ,   TITLE,    CATEGORY,    IMAGE,  COOK_TIME,     DIFFICULTY
+    ,SERVINGS,  DESCRIPTION,      INSTRUCTIONS 
+) 
+VALUES (
+    recipes_id,   APPUSERID ,   title,  category,  NVL(:image, 'user.png'),  cook_time,  difficulty, 
+    servings,  description,  instructions 
+);
+1  1  '비빔밥' 2(한식) 'user1.png' 3 '쉬움'  2'한국의 정취를 느낄수 있는 음식' '양파 2개 계란 2개'   '방법1. 방법2. 방법3. '   
+
+> 재료저장테이블
+insert into recipes_ing values (1 , '양파', '2개');
+insert into recipes_ing values (1 , '계란', '2개');  -- 최대레시피번호
+
+1   양파  2개
+1   계란  2개
+2   양파  2개
+2   계란  2개
+
+> 기존테이블에서   양파, 계란,,, 이 있는지 확인
+> 재료만 입력
+
+
+---- 시간되면 upgrade 
+--- 추가이미지) images
+create table  images(
+   RECIPE_ID  NUMBER ,
+   iurl           varchar2(250) 
+) 
+※ 유저는  여러개의 레시피를 작성할수 있다.
+※ images는 레시피의 여러개의 이미지를 가질 수 있다.
+1	   'r001.png'
+1	   'r002.png'
+1	   'r003.png'
+
+
+
+
+2-2) read [로그인,마이페이지  ,아이디찾기/비밀번호찾기/ 전체유저정보확인]
+...................................................
+-- 1. 레시피 한 개 조회 (SELECT)
+SELECT *  FROM  recipes   WHERE   RECIPE_ID = 1 
+
+-- 2. 작성한유저 조회 (SELECT)   ####
+SELECT *  FROM  recipes   WHERE   RECIPE_ID = 1 (# 작성한유저 sql )
+
+> 페이징이용해서 몇개? 
+
+-- 3. 모든 레시피 조회 (SELECTALL)  ####
+SELECT *
+FROM recipes
+ORDER BY GREATEST(CREATED_AT, NVL(UPDATED_AT, CREATED_AT)) DESC;
+
+> 페이징이용해서 몇개
+	  select  *
+	  from  (
+			select     row_number()   over (  order by  created_at desc )  as  rnum , 
+			id  , app_user_id , btitle, bcontent, bpass, bfile,  bip , bhit, created_at
+			from sboard1
+		)  A
+	where   A.rnum  between  #{start}   and #{end}
+
+
+
+...................................................
+-- 2-3. 레시피 수정 (UPDATE)
+UPDATE recipes
+SET 
+    TITLE = :title,
+    CATEGORY = :category,
+    IMAGE = NVL(:image, 'user.png'),
+    COOK_TIME = :cook_time,
+    DIFFICULTY = :difficulty,
+    SERVINGS = :servings,
+    DESCRIPTION = :description, 
+    INSTRUCTIONS = :instructions,
+    UPDATED_AT = CURRENT_TIMESTAMP
+WHERE 
+    RECIPE_ID = 1
+
+
+--   조회수 증가 (VIEW + 1)
+UPDATE recipes
+SET 
+    VIEWS = VIEWS + 1
+WHERE 
+    RECIPE_ID = 1
+
+
+...................................................
+-- 2-4. 레시피 삭제 (DELETE)
+DELETE FROM recipes
+WHERE 
+    RECIPE_ID = 1
+
+ 
+
+---
+
+■■■■■■■■■■  김정민 파트
+--- 김정민 재료파트
+create table material (
+    materialid          NUMBER(6)        PRIMARY KEY,           -- 재료 고유번호 (PK)
+    imageurl            VARCHAR2(300)   default  'defult.png',  -- 이미지 경로 또는 URL
+    title                  VARCHAR2(200)    NOT NULL,           -- 재료명
+    season               VARCHAR2(100),                         -- 제철 정보
+    temperature      VARCHAR2(50),                              -- 보관 온도
+    calories100g      NUMBER(6),                                -- 100g당 열량
+    efficacy             VARCHAR2(1000),                        -- 효능
+    buyguide            VARCHAR2(1000),                         -- 구입요령
+    trimguide           VARCHAR2(1000),                         -- 손질법
+    storeguide          VARCHAR2(1000),                         -- 보관법
+);
+
+
+
+...................................................
+-- 3-1. create
+insert into material(
+    materialid, title, imageurl, season, temperature, calories100g,
+    efficacy, buyguide, trimguide, storeguide, recipelink
+) values (
+     material_seq.nextval, '메밀면',  'https://대충주소.com/img.jpg', '연중제철', '1~5℃',  142,
+    '소화 촉진', '유통기한을 확인하고 구입한다.',  '끓는 물에 삶아서 사용한다.', '직사광선을 피해 보관한다.' 
+);
+
+
+...................................................
+-- 3-2. read (1)
+select * from material  where materialid = 1;
+
+-- 3-2. read (2)
+select * from material  order by materialid desc;
+
+※ 페이징추가
+select  *
+from  (
+    select     row_number()   over (  order by  created_at desc )  as  rnum , 
+    id  , app_user_id , btitle, bcontent, bpass, bfile,  bip , bhit, created_at
+    from sboard1
+)  A
+where   A.rnum  between  #{start}   and #{end}
+
+...................................................
+-- 3-3.    
+update material set 
+title = '메밀면 (국산)',
+imageurl = 'https://대충주소.com/defult.png',
+season = '6월, 7월, 8월',
+temperature ='1~5℃',
+calories100g = 150,
+efficacy = '소화 촉진, 장 건강 도움',
+buyguide = '면의 색깔 및 상태를 확인후 구매한다',
+trimguide= '면을 부서서 빻아 매밀 가루로 사용한다.',
+storeguide = '서늘하고 통풍이 잘 되는 곳에 보관한다.'
+where materialid =1
+
+...................................................
+-- 3-4. 
+delete from material where materialid=1;
+
+---
+※ 레시피에 해당하는 재료
+
+//기본 JOIN 방식 (FROM A, B WHERE A= B)
+SELECT m.materialid,
+       m.title,
+       mc.category_name
+FROM material m, materialcategory mc
+WHERE m.materialid = mc.materialid
+  AND m.materialid = 1;
+//2. NATURAL JOIN 방식
+  SELECT materialid, title, categoryname
+FROM material 
+NATURAL JOIN materialcategory
+WHERE materialid = 1;
+//3. LEFT JOIN (명시적 ON 사용)
+SELECT m.materialid,
+       m.title,
+       mc.category_name
+FROM material m
+LEFT JOIN materialcategory mc
+       ON m.materialid = mc.materialid
+WHERE m.materialid = 1;
+//4. LEFT JOIN USING (공통 컬럼 자동 인식)
+SELECT materialid, title, categoryname
+FROM material
+LEFT JOIN materialcategory USING(materialid)
+WHERE materialid = 1;

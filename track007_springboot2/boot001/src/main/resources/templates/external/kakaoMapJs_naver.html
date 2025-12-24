@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>현재 위치 기반 매장 추천 (네이버 지도)</title> 
+
+  <!-- 네이버 지도 SDK (신규 방식) -->
+  <script type="text/javascript" 
+          src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=m3jz1a155u&callback=initMap"></script>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+
+  <h2 class="mb-3">📍 현재 위치 기반 매장 추천</h2>
+
+  <!-- 버튼 영역 -->
+  <div class="mb-3">
+    <button id="locateBtn" class="btn btn-primary me-2">내 위치 찾기</button>
+    <button id="showAllBtn" class="btn btn-secondary">모든 매장 표시</button>
+  </div>
+
+  <!-- 지도 영역 -->
+  <div id="map" class="border rounded" style="width:100%; height:500px;"></div>
+
+  <!-- 결과 패널 -->
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">추천 결과</h5>
+      <p id="resultText" class="card-text">아직 위치를 찾지 않았습니다.</p>
+      <div id="storeList" class="list-group"></div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    let map;
+    let userMarker;
+
+    // 지도 초기화 (callback으로 실행됨)
+    function initMap() {
+      // 매장 좌표 데이터 (DB 연동 가능)
+      const stores = [
+        { name: "강남점", lat: 37.498095, lng: 127.027610 },
+        { name: "홍대점", lat: 37.556343, lng: 126.922651 },
+        { name: "인천점", lat: 37.447275, lng: 126.690894 },
+        { name: "시청점", lat: 37.566295, lng: 126.977945 }
+      ];
+
+      // 지도 초기화 (서울 시청 중심)
+      map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(37.5665, 126.9780),
+        zoom: 10
+      });
+
+      // 사용자 위치 마커
+      userMarker = new naver.maps.Marker({ zIndex: 9999, map: map });
+
+      }
+
+      // 버튼 이벤트 연결
+      document.getElementById("locateBtn").onclick = locateAndRecommend;
+      document.getElementById("showAllBtn").onclick = showStores;
+    }
+  </script>
+</body>
+</html>

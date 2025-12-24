@@ -1,0 +1,35 @@
+spring:
+  main:
+    web-application-type: servlet
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: scott
+    password: tiger
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      connection-timeout: 30000
+      pool-name: HikariPool
+  jpa:
+    hibernate:
+      ddl-auto: create  # create /update   테스트 환경에서는 create-drop 권장
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.OracleDialect   # Hibernate 6.x에서 유효
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  profiles:
+    include: oauth      
+
+jwt:
+  secret: "mySuperSuperSecretKey1234567890mySuperSuperSecretKey1234567890AB"
+  access-expiration: 3600000
+  refresh-expiration: 1209600000
+
+server:
+  port: 8484

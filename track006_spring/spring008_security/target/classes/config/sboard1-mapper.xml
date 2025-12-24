@@ -39,7 +39,7 @@
 
 	<update     id="update2"  parameterType="Sboard1Dto">
 	update  sboard1  
-	set     BTITLE=#{btitle} , BCONTENT=#{bcontent} , BFILE=#{bfile}
+	set     BTITLE=#{btitle} , BCONTENT=#{bcontent} , BFILE=#{bfile, jdbcType=VARCHAR}
 	where   id=#{id}   and BPASS= #{bpass} 
 	</update>	
 	
