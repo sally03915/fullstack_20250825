@@ -121,12 +121,4 @@ https://docs.google.com/spreadsheets/d/1s5dTXFDuNB1LPfwZl9G2DNnVyv8UcdMAdDu_rVy5
 sally03915@gmail.com
 
 
-
-
-1. 로그기록확인 
- git log
-
-2. 몇번째
- git reset --hard  HEAD~3  
-
-
+ 

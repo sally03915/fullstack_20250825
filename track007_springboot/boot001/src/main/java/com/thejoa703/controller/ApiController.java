@@ -2,11 +2,14 @@ package com.thejoa703.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +22,10 @@ import com.thejoa703.external.ApiCoolSms;
 import com.thejoa703.external.ApiEmailNaver;
 import com.thejoa703.external.ApiKmaWeather;
 import com.thejoa703.external.BookDto;
+import com.thejoa703.external.KakaoPayService;
 import com.thejoa703.external.NaverBookJsonService;
 import com.thejoa703.external.NaverBookXmlService;
+import com.thejoa703.external.SongCrawling;
 
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
@@ -118,6 +123,50 @@ public class ApiController {
 	public List<BookDto> naverbookXml(@RequestParam String search) throws UnsupportedEncodingException {
 		return xmlService.getBooks(search); 
 	} 
+	
+
+	///////////////////////// SongCrawling
+	@Autowired  SongCrawling    songCrawling;
+	
+
+	@GetMapping("/jsoupView")
+	public String jsoupView() { return "external/jsoup"; }
+	
+	
+	@GetMapping(value="/jsoup" , produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> jsoup(){
+		Map<String,Object> result = new HashMap<>();
+		result.put("data", songCrawling.crawling());
+		return  result;
+	}
+	
+
+
+	///////////////////////// KakaoController
+	@Autowired  KakaoPayService    kakaoPayService;
+	
+	@GetMapping("/pay/kakao") public String kakaoPay()     {  return "external/kakaoPay"; }
+	
+	@PostMapping("/pay/ready")
+	public String kakaoPayReady() {  
+		Map<String, String>  result = kakaoPayService.kakaoPayReady();
+		return "redirect:" + result.get("redirectUrl");
+	} 
+	// 결제성공시 카카오페이가 redirect 해주는 URL
+	@GetMapping("/pay/success")
+	public String kakaoPaySuccess(@RequestParam("pg_token") String pgToken, Model model ) {
+		Map<String, Object>  result = kakaoPayService.kakaoPayApprove(pgToken);
+		model.addAttribute("result", result);
+		return "external/kakaoPaySuccess";
+	} 
+	@GetMapping("/pay/fail")
+	@ResponseBody
+	public String kakaoPayFail() { return "결제실패"; }
+	
+	@GetMapping("/pay/cancel")
+	@ResponseBody
+	public String kakaoPayCancel() { return "결제취소"; }
 	
 }
 
